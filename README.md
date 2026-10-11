@@ -1,10 +1,10 @@
 # GZA：暴力电驴
 
-`gza` 当前是私有的构建与迁移准备仓库。游戏源码和既有 Git 历史继续保留在私有 `YunLeFun/dayun-kicker`；这里仅保存工作流、许可证和说明，不包含游戏源码、媒体、旧 CI 日志或附件。
+`gza` 是 GZA：暴力电驴的公开构建与迁移准备仓库。过渡阶段，游戏源码和既有 Git 历史继续保留在私有 `YunLeFun/dayun-kicker`；这里仅保存本项目的工作流、许可证和说明，不包含游戏源码、媒体、旧 CI 日志或附件。后续将按已确认的许可方案迁入经过审核的源码。
 
 手动工作流用只读凭证临时克隆旧仓库的指定提交，执行 Web 类型检查、单元测试、构建和发布预算检查。可选构建文档；不上传产物、不保存缓存，也不自动部署。未提交的本地修改不会参与远程构建。桌面打包、签名、Steam 发布和浏览器 E2E 不在初版范围内。
 
-私有新仓库仍消耗组织共享的 GitHub-hosted CI 额度，并不能通过换仓库重置额度。当前流程设有私有仓库检查，公开后会自动跳过；改变可见性前需要重新审查日志、凭证、产物和 GitHub 使用条款。[GitHub Actions 计费](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
+公开仓库使用标准 GitHub-hosted runner，按当前规则免费使用构建分钟；本工作流构建同一 GZA 项目，不配置 larger runner、收费存储或自动发布。工作流日志公开，可包含私有源仓库的文件名、诊断内容或源码片段，维护者已接受这一过渡方式。[GitHub Actions 计费](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
 
 - [构建配置和触发方法](docs/private-build.md)
 - [许可范围及未来源码迁移方案](docs/licensing.md)

@@ -27,7 +27,7 @@ git -C /path/to/dayun-kicker fetch origin
 git -C /path/to/dayun-kicker rev-parse origin/main
 ```
 
-在 `gza` 的 Actions 中选择 **Build private GZA source**，从 `main` 手动运行并填入这个 SHA。也可以将下面占位符替换后使用 CLI：
+在 `gza` 的 Actions 中选择 **Build GZA**，从 `main` 手动运行并填入这个 SHA。也可以将下面占位符替换后使用 CLI：
 
 ```sh
 gh workflow run build-private-source.yml \
@@ -42,14 +42,14 @@ gh workflow run build-private-source.yml \
 
 初版没有 artifact 或 cache 上传，构建文件在一次性的 GitHub-hosted runner 中使用，任务结束后不提供下载。需要下载、部署或发布时，先确定私有存储目标及素材许可，再增加相应步骤。
 
-## 额度和公开前处理
+## 公开构建与额度
 
-私有 `gza` 与旧仓库共享 `YunLeFun` 的 hosted runner 额度。公开仓库的标准 runner 和 self-hosted runner 按当前计费文档免 GitHub Actions 使用费用；自托管机器仍有自身资源与维护成本。[GitHub Actions 计费](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
+`gza` 作为同一 GZA 项目的公开构建仓库，当前使用标准 `ubuntu-latest` runner。公开仓库的标准 runner 按当前计费文档免费使用 GitHub Actions 构建分钟；larger runner 另行收费。本流程不上传 artifact 或 cache。[GitHub Actions 计费](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
 
-公开仓库可以在技术上凭 token 克隆私有源码，但公开工作流日志可能暴露文件名、源码片段、配置和错误内容；产物、source map、测试报告和缓存也可能包含私有内容。Secret 掩码不会自动隐藏所有这些信息。[GitHub Actions 安全指南](https://docs.github.com/en/actions/reference/security/secure-use)
+维护者已接受公开工作流日志可能包含私有源仓库的文件名、源码片段、配置或错误内容。访问 token 和其他凭证仍保密，禁止将它们输出到日志。Secret 掩码不会自动隐藏全部私有代码和诊断信息。[GitHub Actions 安全指南](https://docs.github.com/en/actions/reference/security/secure-use)
 
-GitHub 条款要求 hosted runner 的任务关联执行仓库的软件项目，并未直接禁止跨仓库 checkout。这里不能据此保证“只放 CI 的公开仓库构建私有游戏”一定属于可持续的免费使用；若拟采用该模式，应向 GitHub 确认适用范围。[Actions 使用条款](https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#actions)
+GitHub 条款要求 hosted runner 的任务关联执行仓库的软件项目，没有直接禁止跨仓库 checkout。`gza` 的工作流用于构建本仓库所代表的 GZA 项目，私有源仓库是过渡阶段的源码输入。计费与条款以后可能变化，继续按适用规则使用，不将 Actions 用于无关项目或服务。[Actions 使用条款](https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features#actions)
 
-当前 job 同时要求仓库私有且工作流来自 `main`；仅有 `workflow_dispatch`，没有 push、PR、定时或外部派发触发。token 不持久写入 Git 配置；官方 action 固定到完整 SHA；不配置私有源码缓存和产物上传。这些措施不替代对可信构建脚本的审查。
+当前 job 要求仓库为官方 `YunLeFun/gza` 且工作流来自 `main`；仅有 `workflow_dispatch`，没有 push、PR、定时或外部派发触发。公开查看者和 fork 不会因此获得运行带凭证工作流的权限。token 不持久写入 Git 配置；官方 action 固定到完整 SHA；不配置私有源码缓存和产物上传。这些措施不替代对可信构建脚本的审查。
 
-当前不公开 `gza`。未来若改变可见性，需要先审查并处理此前的运行日志、artifact、cache、分支与标签，以及旧 token 的范围和有效期，不能只检查工作树。初版的私有检查需在新评审后才调整。暂时解决额度问题可以在旧私有仓库或 `gza` 使用独立的 self-hosted runner，无需先迁移源码；本次没有安装、注册或启动自托管 runner。
+首次公开前已检查新仓库的完整提交历史及现有 Actions 状态，未导入旧源码、旧 Git 历史或附件，也未运行过 CI 或上传产物。后续新增下载、部署、发行、PR 或自动派发流程时，再按实际授权和数据范围审查。本次不改变旧 `dayun-kicker` 的可见性，也不注册或启动自托管 runner。

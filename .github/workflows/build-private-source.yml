@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-name: Build private GZA source
+name: Build GZA
 run-name: Build source ${{ inputs.source_sha }}
 
 on:
@@ -22,8 +22,8 @@ concurrency:
 
 jobs:
   web:
-    # Private source logs must not run in a public repository without a new review.
-    if: ${{ github.event.repository.private == true && github.ref == 'refs/heads/main' }}
+    # Only maintainers can dispatch the canonical repository's main workflow.
+    if: ${{ github.repository == 'YunLeFun/gza' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     defaults:
