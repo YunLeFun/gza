@@ -1,0 +1,3 @@
+.game-panel { padding: var(--ui-panel-padding, var(--ui-space-5)); border: 1px solid var(--ui-line); border-radius: var(--ui-radius); background: var(--ui-panel); color: var(--ui-text); box-shadow: var(--ui-shadow-panel); }
+.game-panel[data-ui-tone="strong"] { background: var(--ui-panel-strong); }
+.game-panel[data-ui-tone="hud"] { padding: var(--ui-panel-padding, var(--ui-space-3) var(--ui-space-4)); border: 0; background: var(--ui-panel-hud); box-shadow: none; }

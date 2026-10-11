@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Documentation
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Enable pinned pnpm
+        run: corepack enable && corepack install
+      - name: Check Git asset policy
+        run: node scripts/check-git-assets.mjs
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check documentation types and build
+        run: pnpm docs:typecheck && pnpm docs:build

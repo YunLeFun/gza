@@ -1,0 +1,142 @@
+/* Map the documentation theme to the game's shared UI tokens. */
+:root,
+.dark {
+  --vp-font-family-base: var(--ui-font);
+  --vp-font-family-mono: var(--ui-font-number);
+  --vp-c-bg: var(--ui-background);
+  --vp-c-bg-alt: var(--ui-panel-strong);
+  --vp-c-bg-soft: var(--ui-surface);
+  --vp-c-bg-elv: var(--ui-surface-raised);
+  --vp-c-text-1: var(--ui-text);
+  --vp-c-text-2: var(--ui-text-muted);
+  --vp-c-text-3: var(--ui-text-subtle);
+  --vp-c-divider: var(--ui-line);
+  --vp-c-border: var(--ui-line-strong);
+  --vp-c-gutter: var(--ui-line);
+  --vp-c-brand-1: var(--ui-text);
+  --vp-c-brand-2: var(--ui-text-muted);
+  --vp-c-brand-3: var(--ui-selected);
+  --vp-c-brand-soft: var(--ui-hover);
+  --vp-c-tip-1: var(--ui-success);
+  --vp-c-tip-soft: var(--ui-panel);
+  --vp-c-warning-1: var(--ui-warning);
+  --vp-c-warning-soft: var(--ui-panel);
+  --vp-c-danger-1: var(--ui-danger);
+  --vp-c-danger-soft: var(--ui-panel);
+  --vp-c-default-soft: var(--ui-panel);
+  --vp-button-brand-text: var(--ui-on-selected);
+  --vp-button-brand-bg: var(--ui-selected);
+  --vp-button-brand-hover-text: var(--ui-on-selected);
+  --vp-button-brand-hover-bg: var(--ui-text-muted);
+  --vp-button-brand-active-text: var(--ui-on-selected);
+  --vp-button-brand-active-bg: var(--ui-selected);
+  --vp-button-alt-text: var(--ui-text);
+  --vp-button-alt-bg: var(--ui-panel);
+  --vp-button-alt-hover-text: var(--ui-text);
+  --vp-button-alt-hover-bg: var(--ui-surface-raised);
+  --vp-home-hero-name-color: var(--ui-text);
+  --vp-nav-bg-color: var(--ui-panel-strong);
+  --vp-sidebar-bg-color: var(--ui-panel-strong);
+  --vp-local-search-bg: var(--ui-surface);
+  --vp-local-search-result-bg: var(--ui-panel);
+  --vp-local-search-result-border: var(--ui-line);
+  --vp-local-search-result-selected-bg: var(--ui-selected);
+  --vp-local-search-result-selected-border: var(--ui-selected);
+  --vp-local-search-highlight-bg: var(--ui-on-selected);
+  --vp-local-search-highlight-text: var(--ui-selected);
+}
+
+.VPHomeHero .name,
+.VPHomeHero .text,
+.vp-doc h1,
+.vp-doc h2 {
+  font-family: var(--ui-font-display);
+}
+
+.VPButton,
+.VPFeature,
+.VPDocFooter .pager-link,
+.custom-block,
+.vp-doc div[class*="language-"],
+.VPLocalSearchBox .shell,
+.VPLocalSearchBox .search-bar,
+.VPLocalSearchBox .result {
+  border-radius: var(--ui-radius) !important;
+}
+
+.VPFeature,
+.custom-block,
+.VPDocFooter .pager-link,
+.VPButton.alt {
+  border: 1px solid var(--ui-line) !important;
+}
+
+.VPButton {
+  min-height: var(--ui-control-height);
+  transition-duration: var(--ui-motion);
+}
+
+.vp-doc p,
+.vp-doc li {
+  line-height: 1.9;
+}
+
+.vp-doc a {
+  text-underline-offset: var(--ui-space-1);
+}
+
+.VPHome .vp-doc {
+  max-width: 960px;
+  margin: var(--ui-space-6) auto;
+  padding: var(--ui-space-6) var(--ui-space-5);
+}
+
+.vp-doc th,
+.vp-doc td {
+  min-width: 5em;
+}
+
+.VPLocalSearchBox .result.selected {
+  background: var(--ui-selected);
+  color: var(--ui-on-selected);
+  --vp-c-text-1: var(--ui-on-selected);
+  --vp-c-text-2: var(--ui-on-selected);
+  --vp-c-text-3: var(--ui-on-selected);
+  --vp-c-brand-1: var(--ui-on-selected);
+}
+
+:focus-visible {
+  outline: var(--ui-focus-width) solid var(--ui-focus);
+  outline-offset: var(--ui-space-1);
+}
+
+/* Keep all navigation links visible before the wider desktop layout begins. */
+@media (min-width: 768px) and (max-width: 959px) {
+  .VPNavBarSearch {
+    padding-left: var(--ui-space-4);
+  }
+
+  .VPNavBarSearch .DocSearch-Button {
+    justify-content: center;
+    width: var(--ui-control-height);
+    padding: 0;
+  }
+
+  .VPNavBarSearch .DocSearch-Button-Placeholder,
+  .VPNavBarSearch .DocSearch-Button-Keys {
+    display: none;
+  }
+
+  .VPNavBarSearch .DocSearch-Search-Icon {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .VPNavBarMenuLink,
+  .VPNavScreenMenuLink,
+  .VPSidebarItem .link,
+  .VPDocFooter .pager-link {
+    min-height: var(--ui-control-height);
+  }
+}

@@ -1,0 +1,103 @@
+/* Shared GTA V inspired game UI: dark overlays, white selection, semantic HUD colors. */
+:root {
+  --ui-background: #090909;
+  --ui-surface: #171717;
+  --ui-surface-raised: #272727;
+  --ui-panel: #101010d9;
+  --ui-panel-strong: #101010f2;
+  --ui-panel-hud: #090909b8;
+  --ui-scrim: #0000008c;
+  --ui-text: #f5f5f1;
+  --ui-text-muted: #b6b6b3;
+  --ui-text-subtle: #92928f;
+  --ui-selected: #f5f5f1;
+  --ui-on-selected: #151515;
+  --ui-hover: #ffffff14;
+  --ui-line: #ffffff26;
+  --ui-line-strong: #ffffff52;
+  --ui-success: #9cc58b;
+  --ui-info: #82b6df;
+  --ui-warning: #e6c75b;
+  --ui-danger: #ed9a8b;
+  --ui-focus: var(--ui-warning);
+
+  --ui-font: "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --ui-font-display: "Arial Narrow", "Helvetica Neue", "PingFang SC", sans-serif;
+  --ui-font-number: "DIN Alternate", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --ui-text-xs: 11px;
+  --ui-text-sm: 13px;
+  --ui-text-md: 15px;
+  --ui-text-lg: 20px;
+  --ui-text-title: clamp(25px, 3vw, 34px);
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-5: 24px;
+  --ui-space-6: 32px;
+  --ui-radius: 0px;
+  --ui-control-height: 40px;
+  --ui-control-small: 34px;
+  --ui-control-large: 52px;
+  --ui-titlebar-height: 40px;
+  --ui-focus-width: 2px;
+  --ui-shadow-panel: 0 16px 48px #0000004d;
+  --ui-shadow-text: 0 1px 3px #000000b3;
+  --ui-motion: 120ms;
+  /* HUD tools remain reachable above the home menu. */
+  --ui-layer-hud: 36;
+  --ui-layer-menu: 30;
+  --ui-layer-dialog: 42;
+  --ui-layer-checkout: 70;
+  --ui-layer-recovery: 80;
+  --ui-layer-fullscreen: 160;
+  --ui-layer-popover: 10000;
+  --ui-layer-debug: 100000;
+
+  /* Existing game styles use these aliases while surfaces migrate to shared components. */
+  --ink: var(--ui-text);
+  --muted: var(--ui-text-muted);
+  --asphalt: var(--ui-background);
+  --panel: var(--ui-panel);
+  --panel-strong: var(--ui-panel-strong);
+  --line: var(--ui-line);
+  --electric: var(--ui-info);
+  --hazard: var(--ui-warning);
+  --danger: var(--ui-danger);
+  --rubber: var(--ui-surface);
+  --screen: var(--ui-background);
+  --display: var(--ui-surface);
+  --display-raised: var(--ui-surface-raised);
+  --screen-edge: var(--ui-line-strong);
+  --panel-glow: transparent;
+  --signal: var(--ui-success);
+  --digit-font: var(--ui-font-number);
+  --arcade-ink: var(--ui-on-selected);
+  --arcade-paper: var(--ui-text);
+  --arcade-blue: var(--ui-selected);
+  --arcade-blue-field: var(--ui-surface);
+  --arcade-orange: var(--ui-danger);
+  --arcade-yellow: var(--ui-warning);
+  --arcade-mint: var(--ui-success);
+  --launch-text: var(--ui-text);
+  --launch-muted: var(--ui-text-muted);
+  --launch-accent: var(--ui-selected);
+  --launch-surface: var(--ui-surface);
+  --launch-line: var(--ui-line);
+  --menu-muted: var(--ui-text-muted);
+  --menu-line: var(--ui-line);
+  --menu-hover: var(--ui-hover);
+  --menu-input: var(--ui-background);
+  --menu-on-accent: var(--ui-on-selected);
+  --menu-positive: var(--ui-success);
+  --menu-error: var(--ui-danger);
+  color-scheme: dark;
+  font-family: var(--ui-font);
+}
+
+@media (pointer: coarse), (max-width: 700px) {
+  :root { --ui-control-height: 44px; --ui-control-small: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --ui-motion: 0ms; }
+}

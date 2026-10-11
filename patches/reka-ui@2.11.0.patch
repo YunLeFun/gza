@@ -1,0 +1,61 @@
+diff --git a/dist/shared/useId.js b/dist/shared/useId.js
+index 1d1ea1c330b341241effc2aa4137833eb6b598d7..b69a3c59eca7b83f9ac2555f6026309419d392a6 100644
+--- a/dist/shared/useId.js
++++ b/dist/shared/useId.js
+@@ -1,11 +1,10 @@
+ import { injectConfigProviderContext } from "../ConfigProvider/ConfigProvider.js";
+-import * as vue from "vue";
++import { useId as vueUseId } from "vue";
+ 
+ //#region src/shared/useId.ts
+-let count = 0;
+ /**
+ * The `useId` function generates a unique identifier using a provided deterministic ID,
+-* a configured `<ConfigProvider>` ID source, Vue's native `useId`, or a fallback counter.
++* a configured `<ConfigProvider>` ID source, Vue's native `useId` (requires Vue 3.5+).
+ * @param {string | null | undefined} [deterministicId] - The `useId` function you provided takes an
+ * optional parameter `deterministicId`, which can be a string, null, or undefined. If
+ * `deterministicId` is provided, the function will return it. Otherwise, it will generate an id using
+@@ -16,8 +15,7 @@ function useId(deterministicId, prefix = "reka") {
+ 	let id;
+ 	const configProviderContext = injectConfigProviderContext({ useId: void 0 });
+ 	if (configProviderContext.useId) id = configProviderContext.useId();
+-	else if ("useId" in vue) id = vue.useId?.();
+-	else id = `${++count}`;
++	else id = vueUseId();
+ 	return prefix ? `${prefix}-${id}` : id;
+ }
+ 
+diff --git a/src/shared/useId.ts b/src/shared/useId.ts
+index fc7dce9527fd5d6c05252a52548be2ffb73f6ae2..ef3ecc9544715102d2aa0ca7be8c9c7ef819c2a8 100644
+--- a/src/shared/useId.ts
++++ b/src/shared/useId.ts
+@@ -1,12 +1,10 @@
+-import * as vue from 'vue'
+-// Inspired from https://github.com/tailwindlabs/headlessui/issues/2913
+-// as the alternative, and a fallback for Vue version < 3.5
++import { useId as vueUseId } from 'vue'
++// This workspace requires Vue 3.5+; use the native ID generator.
+ import { injectConfigProviderContext } from '@/ConfigProvider/ConfigProvider.vue'
+ 
+-let count = 0
+ /**
+  * The `useId` function generates a unique identifier using a provided deterministic ID,
+- * a configured `<ConfigProvider>` ID source, Vue's native `useId`, or a fallback counter.
++ * a configured `<ConfigProvider>` ID source, Vue's native `useId` (requires Vue 3.5+).
+  * @param {string | null | undefined} [deterministicId] - The `useId` function you provided takes an
+  * optional parameter `deterministicId`, which can be a string, null, or undefined. If
+  * `deterministicId` is provided, the function will return it. Otherwise, it will generate an id using
+@@ -26,11 +24,8 @@ export function useId(deterministicId?: string | null | undefined, prefix = 'rek
+   if (configProviderContext.useId) {
+     id = configProviderContext.useId()
+   }
+-  else if ('useId' in vue) {
+-    id = vue.useId?.()
+-  }
+   else {
+-    id = `${++count}`
++    id = vueUseId()
+   }
+ 
+   return prefix ? `${prefix}-${id}` : id

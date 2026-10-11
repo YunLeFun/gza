@@ -14,7 +14,8 @@ on:
         default: false
         type: boolean
 
-permissions: {}
+permissions:
+  contents: read
 
 concurrency:
   group: private-source-build
@@ -97,8 +98,20 @@ jobs:
           pnpm verify:release
           pnpm verify:performance
 
-      - name: Typecheck and build documentation
+      - name: Checkout public documentation
         if: ${{ inputs.build_docs }}
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/gza
+          ref: ${{ github.sha }}
+          path: public-docs
+          persist-credentials: false
+
+      - name: Typecheck and build public documentation
+        if: ${{ inputs.build_docs }}
+        working-directory: public-docs
         run: |
+          corepack install
+          pnpm install --frozen-lockfile
           pnpm docs:typecheck
           pnpm docs:build

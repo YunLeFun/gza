@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "product": "dayun-kicker",
+  "channel": "preview",
+  "releaseVersion": "0.1.0-preview.20261009.3",
+  "appVersion": "0.1.0",
+  "sourceBuildSha256": "3ff39260158d610c773f358a3f27f46d78bdb5c0d17208dc2c72f340ebd96e64",
+  "artifacts": [
+    {
+      "platform": "mac",
+      "arch": "arm64",
+      "name": "GZA-0.1.0-mac-arm64.zip",
+      "bytes": 140959398,
+      "sha256": "6c2666771aabaf7952f2979db8176ee5c75a32d8f640a7e0ace19ab37e8d111c",
+      "rendererManifestSha256": "bc9bb972b27efbef1836979c7c279ddd9aadc294a0a79efa5595576a69c615d9",
+      "url": "https://yunlefun-assets-prod-1325586649.cos.ap-shanghai.myqcloud.com/dayun-kicker/releases/artifacts/6c2666771aabaf7952f2979db8176ee5c75a32d8f640a7e0ace19ab37e8d111c/GZA-0.1.0-mac-arm64.zip"
+    }
+  ],
+  "manifestUrl": "https://yunlefun-assets-prod-1325586649.cos.ap-shanghai.myqcloud.com/dayun-kicker/releases/preview/versions/0.1.0-preview.20261009.3/152d70b57e037f2501913addf160c8a3ad997b17b990108ba264fc96b6677eba.json",
+  "manifestSha256": "152d70b57e037f2501913addf160c8a3ad997b17b990108ba264fc96b6677eba"
+}

@@ -7,6 +7,10 @@ dist/
 artifacts/
 artifacts.local/
 *.log
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/.edgeone/
+.edgeone/
 .DS_Store
 .env
 .env.*
@@ -18,3 +22,7 @@ artifacts.local/
 id_rsa
 id_ecdsa
 id_ed25519
+
+# Map geometry is restored from the pinned COS manifest.
+docs/data/map-roads.json
+docs/data/map-shapes.json

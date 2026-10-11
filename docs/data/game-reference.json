@@ -1,0 +1,655 @@
+{
+  "sourceRepository": "YunLeFun/dayun-kicker",
+  "sourceHead": "fa997f18a15961092770a2afce1c51a8b6566540",
+  "snapshotDate": "2026-10-12",
+  "sourceState": "reviewed working tree, including uncommitted documentation dependencies",
+  "files": [
+    {
+      "path": "apps/dayun-kicker/src/assets/yunle-logo.svg",
+      "sha256": "433007d8b1a7555ef866e279d17d78548284d1dab6340d61f81386bbf6991013",
+      "bytes": 409
+    },
+    {
+      "path": "apps/dayun-kicker/src/city-coop/meleeEffects.ts",
+      "sha256": "31b31925484b8f4c51df5883e522f146423346f23f49c9662a66fad0d465a610",
+      "bytes": 5136
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/clientDownloads.ts",
+      "sha256": "37e440f68abc45721d3e7f65bcd3ed3774178d79c93df2b6c13790f30295c055",
+      "bytes": 1342
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/district/busTransit.ts",
+      "sha256": "2732af57d55d0a0cb88d7dff13f61f96b5883f266609c1c6dba4c9651c42bda0",
+      "bytes": 1212
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/district/delivery.ts",
+      "sha256": "32e24b36fa75f6a5be5ab32e38ceac1482c27b8d6565645d266de9964dab5f3d",
+      "bytes": 372
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/district/liyingReference.json",
+      "sha256": "c959f08c3b089ccd8866f58578b354264aae9aa459b62649b29af013dc751d9c",
+      "bytes": 2056
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/district/ride.ts",
+      "sha256": "9fc8b9ac0e0f84daeb6d51347bcfce6d0e44c58aafc776d66603db1eb99bd844",
+      "bytes": 1112
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/district/streetActivity.ts",
+      "sha256": "5cc0b9363699e6fdf87b3fd275c0260a3b26b0137218d658b5d24f06776d851a",
+      "bytes": 1865
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/gameplay/combat.ts",
+      "sha256": "e58d59bb5004e733dc0ba6c834ec605c7945267e3bbc4af15bd96ed92ebffcd7",
+      "bytes": 2137
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/gameplay/courses.ts",
+      "sha256": "4f6f8d4906ec0309e9a6fd5e1e44a1a5ed6c01f40095c5a189602b58d9929909",
+      "bytes": 266
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/gameplay/items.ts",
+      "sha256": "6e48078cc4de299caab24b17708f16de0018036354e0a5bfc0454a53a3ce5552",
+      "bytes": 261
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/gameplay/race.ts",
+      "sha256": "9ab5ef1e12d10c54e44375d8343fce5058f83727c324b537e1db9147fac42d87",
+      "bytes": 1877
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/gameplay/track.ts",
+      "sha256": "36f66863a7049f5600d6fc5b0a6117400fddc1ce3038f60c2ef0523fb0e0070c",
+      "bytes": 1339
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/input.ts",
+      "sha256": "12dd2b9d7dc997388f551536aaff2be4b0a80d18c696be53d537ddd9ebb9962a",
+      "bytes": 1819
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/progression.ts",
+      "sha256": "c65d2eb5b8849722b19e5462fb7dedf9526471f696df7b42db8b862ebfe6987e",
+      "bytes": 277
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/render/environment.ts",
+      "sha256": "72f39564b17599bfe27902dec02c95afdf37073d304e74b2f992b7aa5c49e72c",
+      "bytes": 2940
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/render/rider.ts",
+      "sha256": "a880a134fcf9fb45224b78e103e685b6f3da49021431755d38cf119c25045cf6",
+      "bytes": 1009
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/skinMessages.ts",
+      "sha256": "74f91728cf1542cff1d939fdb5d71b2d6ebb96938beec4b744145c7318820aac",
+      "bytes": 2045
+    },
+    {
+      "path": "apps/dayun-kicker/src/config/storage.ts",
+      "sha256": "ec7bbf15dc737ba7f63d8513e15a7dfe8fd967e3f3896d4dfd52d675a024a735",
+      "bytes": 1268
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/bridgeDecks.ts",
+      "sha256": "162c0c08e0de0841da7568c629f5b89f7fd606ec32efeee64c2165c7253b25b0",
+      "bytes": 11379
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/busStops.ts",
+      "sha256": "82968a2f487976e5d0f4b21cbc13ea48000dc8fa6017aef4008394cab175df12",
+      "bytes": 3974
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/cantonTowerSite.ts",
+      "sha256": "2c9740421aa720f492ffbe3fbbf05b89140a944dc24f2db97d6f7684148a7438",
+      "bytes": 7051
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/chenClanSite.ts",
+      "sha256": "55179247209e7730a45a618ff17d07867fb2466be5f5e35578eccad7b3fa999b",
+      "bytes": 4273
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/chigangSite.ts",
+      "sha256": "41f033a594680c815086664f2cc2a6ab740c2cc962580efa3374e3fee15b3bfa",
+      "bytes": 3915
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/districtInfill.ts",
+      "sha256": "1d507fc103ca1aecf3ac2564acb462e16ec7dc0b5f2cb9b80cf743419849b1f5",
+      "bytes": 2318
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/expansionDetail.ts",
+      "sha256": "f101bddf4b3dda5c46149a468e8c12568f8ac12ad60c2b1dcb7b8d40df1dbe88",
+      "bytes": 533
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/input.ts",
+      "sha256": "461910137f185c91cb2880f8944ac9d8f7a5c231e213d21d3e3364810f3401b7",
+      "bytes": 8122
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/interchanges.ts",
+      "sha256": "5e2debb7790014abc50c5c3fe5e4fdc81027283fe6e1042fcbdb26790e7c7984",
+      "bytes": 1594
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/inventory.ts",
+      "sha256": "4c1f2c2696c7755e259a872f676f59f9027bbc4c60307fca2fc84064cdd508da",
+      "bytes": 5700
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/jianghaiSite.ts",
+      "sha256": "c5af539d53fcd18715ecc7ceb83c4d3a4eb14dee3f338e231cffc0843bc4d260",
+      "bytes": 3136
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/liyingSite.ts",
+      "sha256": "82bd4aa0f2214441d019716e7f82c50c16b952cbbb7112eb85acb6302cea614d",
+      "bytes": 5126
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/map.ts",
+      "sha256": "470ff5715bf07877a359e94d4530a42bbf605bc6025f76b4d60506c3b9e6424a",
+      "bytes": 17213
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/mcdonaldsSite.ts",
+      "sha256": "d74b3f8136833c79f2836b0ad34b084e38b9d247dfe657fe09e08bf5db7f7778",
+      "bytes": 1802
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/ninebotSite.ts",
+      "sha256": "51c1e4754072002908e67c3bfb7d49a87559912434934399fe397cf88e1f4042",
+      "bytes": 2697
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/pazhouGround.ts",
+      "sha256": "2708dc528a1a039931b6dcda489a6e9bc35da05d68abba717ce162ad135284bf",
+      "bytes": 10794
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/pazhouPlaces.ts",
+      "sha256": "cf7bfdec2b37f44b8a9a5d7876b544f505c930bf15ef3074658c71d74f506471",
+      "bytes": 1961
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/places.ts",
+      "sha256": "19e307306f45be143faccd515df331097df85b251e3e3dc5d2c03dd44fa2cf18",
+      "bytes": 11466
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/polygonIndex.ts",
+      "sha256": "8d3fada44e3d7ef186d3d3d72326b9d83a0c68be65976807605814798f7adb6a",
+      "bytes": 1377
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/ride.ts",
+      "sha256": "16e695ec2518c25e4b395e8c110388ec65c4454a75b77b465cf94563a72d0f8f",
+      "bytes": 7642
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/roadWidth.ts",
+      "sha256": "7ac82253f0013bcb4b4dab80c1fbc21b3e9c00bcce4f4c7a0418c434ffa8a9a4",
+      "bytes": 541
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/scavenging.ts",
+      "sha256": "f60d029cd5c608644659c1b6e77adf6abad4192ec16e62cc9693e0a18b21f353",
+      "bytes": 5441
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/scavengingState.ts",
+      "sha256": "4fe7201a5415cb6c3446c2354fa55650727a3f9a514352e6597f0fedb8376627",
+      "bytes": 2236
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/segmentDistance.ts",
+      "sha256": "7754236b7475e052d97c13c8289d209a01f854ccb58dc8ec4cfddb69f48188b2",
+      "bytes": 388
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/streets.ts",
+      "sha256": "4a9f23e183705ff75b37668baf98039fce45bf8cb7c74ba2767f01abfa15bd58",
+      "bytes": 19924
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/surfaces.ts",
+      "sha256": "bdef576eba21398265bcc1c919886aebb5ac6ef22bcf6fc3ff0c12a2b1e50d4a",
+      "bytes": 16586
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/tankModel.ts",
+      "sha256": "b83f8235e4f2c93ede469e8863f03082456c2b4dcb3bed9f5a1b8eabd3842d95",
+      "bytes": 6311
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/tencentArchitecture.ts",
+      "sha256": "9c3223e4cec5a1fc004bb9f2aa940082720d56cb2936df9a6722fff00b56b509",
+      "bytes": 4777
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/tencentForecourtSite.ts",
+      "sha256": "e89eac3264194a6fac57ae4a73cca34ec488740b2845e1650d82ee340b9b0c55",
+      "bytes": 3437
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/tencentJunctionSite.ts",
+      "sha256": "4d23a71ed2a993541b3de2ba0faad6f43b525b0e55594530e84cd03022d8117c",
+      "bytes": 3198
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/titSite.ts",
+      "sha256": "4a2de04502634a9a789d86429c4670800bf03c40cfcd8c5990632ebf4261146e",
+      "bytes": 8124
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/titWestStreetLayout.ts",
+      "sha256": "ed3779557b0a4601557bd3dc870e59d875fa72253031b8e835c0c17117e54aab",
+      "bytes": 2046
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/vehicle.ts",
+      "sha256": "d3da6ccd7a77996f048b79ae901bb0be001050c18a92ec43919c1dece7c88b5f",
+      "bytes": 3684
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/vipshopLayout.ts",
+      "sha256": "107f09413e08dcfcc5ef624e4781647034201f9ee3c2cea39688a93af6c6a626",
+      "bytes": 2503
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/vipshopRoofLayout.ts",
+      "sha256": "351fb5b4b0acb39e951a4940a8d5414948160f1bad2405dfd81e9b5feb33e19c",
+      "bytes": 1294
+    },
+    {
+      "path": "apps/dayun-kicker/src/district/waterTravel.ts",
+      "sha256": "84c3d7af8e8785f244a92cb62df72b01be3fc9d2d0b5a1aaec283f60dc82744a",
+      "bytes": 7778
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/cantonTrack.ts",
+      "sha256": "d1de043797244803ecb81a1bdd88fc2bbc742571e579c4b2744c940a58c13f4e",
+      "bytes": 2959
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/circuitRace.ts",
+      "sha256": "780444eb9451d38f9fd8dbb59622a814f6b5b56850c30a8bedc2299ee29c6313",
+      "bytes": 5021
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/commuteTrack.ts",
+      "sha256": "583d390c13fe3929bff7f296e1812563154738bad1b82713378ef481ac12190a",
+      "bytes": 1183
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/courierCareer.ts",
+      "sha256": "ae7a34337eaf132761d25abbcea535f3066ce2bcbbb81a3d5b2d590ebf1a8d0b",
+      "bytes": 2685
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/gamepad.ts",
+      "sha256": "8cb3c8904136f389ee42b000e60268a84a1c717fad2a5ca4d3e9057c8e14165f",
+      "bytes": 4180
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/input.ts",
+      "sha256": "9683fc2be20615be3c95cb237268863729e6884356d9c623375ba06f8fdc1389",
+      "bytes": 13830
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/items.ts",
+      "sha256": "2b5e0f908e4c9df77166b32167eb3eaeb8eea07d61e12841b0dd0c5c0a49198c",
+      "bytes": 3708
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/kickInputBuffer.ts",
+      "sha256": "f31106a467df66031421216f0d79a80b4316706070c4c15e918f9459e27b065a",
+      "bytes": 885
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/raceCourse.ts",
+      "sha256": "3bce9e5e8e10bf0e53329a7a9a55fa249b927f6dd6500b42c472151b837b485a",
+      "bytes": 402
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/ramImpact.ts",
+      "sha256": "a81b43ce15a48ee293b7cf2519b00f5052be32fedbfc88dc90e0fc85d81fe4a4",
+      "bytes": 4383
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/randomTrack.ts",
+      "sha256": "61b21ef21fe9e11b1f896883038be8383fe5eccbd14a2b4f196bfbea7b9c70a3",
+      "bytes": 1792
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/sizeShift.ts",
+      "sha256": "e927368769a73abf9af2331590e40e0424ce7932fae0fce66d6415f63e6257c2",
+      "bytes": 546
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/skins.ts",
+      "sha256": "176d7ffe3f756e308eb6b4dabff5414f4e8b98739c0a0750dde261b02cc2a4ba",
+      "bytes": 7240
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/track.ts",
+      "sha256": "6ccae18acfa6bff8c1cbae94344fc60db45bbeffd22fd59aff60c7816d17a9a9",
+      "bytes": 6595
+    },
+    {
+      "path": "apps/dayun-kicker/src/game/types.ts",
+      "sha256": "51b125c9bf4ac745662677845da728cf6e4e17c7c6fd8a64788f466d926af5c3",
+      "bytes": 3576
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/busModel.ts",
+      "sha256": "255b4c1a6601ad0390a0be8f25ddf63e85410c2877dbe0155030340191108dd5",
+      "bytes": 5601
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/carModel.ts",
+      "sha256": "4d38f1bd8efb2b59448965a6a8d142cf3bbdb2c11f0bd29ae9f0d807b4f1fd52",
+      "bytes": 3096
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/cockpitAppearance.ts",
+      "sha256": "9cc7ca1b557e22cf4e5e87af1efd1a6b92307d11055ce08194b158a461b09b12",
+      "bytes": 1956
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/cockpitModel.ts",
+      "sha256": "67628a040fc8441ce28027aa3396eeb897bc5496e825a3c88869d2e635690d62",
+      "bytes": 31524
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/constructionVehicle.ts",
+      "sha256": "db930ec3a7cd5db429b37b0d89fe35c7d866dd724a78dade789110c794b0badf",
+      "bytes": 4601
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/householdWeaponModel.ts",
+      "sha256": "f5d6c3e0e7f241e94524e386b5c9ec65b610e19081b347202dc2e369c4e7f6cf",
+      "bytes": 3490
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/itemBoxes.ts",
+      "sha256": "2f40a759c8f5e24dbc82f76a83285f1260e8b38970e2d1f904d701b666d56374",
+      "bytes": 2718
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/lowPolyTrees.ts",
+      "sha256": "1e374a822b915cc15abad622236ee53da7fb12be0ebb034ad26809e94c28d709",
+      "bytes": 8322
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/nodeMaterials.ts",
+      "sha256": "682be2868597835cd11330dfe7991057d3c56788a0a0edd1b3146db22b06337a",
+      "bytes": 663
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/nodeMaterialsRuntime.ts",
+      "sha256": "caf6e7d82e1526ef721ea4ecdc447053d3aaa0e9e7da455d81f9ab78a30c6a55",
+      "bytes": 3380
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/passengerRig.ts",
+      "sha256": "6c843f61134ab6bd5d98e2594742e14b43dbc7938e1bab6317d2b505ea8cad11",
+      "bytes": 15433
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/planarWaterCapture.ts",
+      "sha256": "c7ac105f6bd70d5ddb3ce764212d992a03a7262481ab8e0cd45056b89026d830",
+      "bytes": 4297
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/rendererTypes.ts",
+      "sha256": "1976d3f92e348a6a435b95b1660ce095014935df37c5b4b28667d2de349e0380",
+      "bytes": 863
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/riderHelmet.ts",
+      "sha256": "4bfa4b7126f950f0a3a85a4bff7ce847c45eb5c0029645a1a80eea71df7e5b5a",
+      "bytes": 2220
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/riderRig.ts",
+      "sha256": "2ef7c5cc4899a3300047efea130598b4b4b30f59f94f4407ec0fbbea7122be89",
+      "bytes": 5409
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/scooterBody.ts",
+      "sha256": "06dd8f8c87328a4c593d8f9cca49d6531d2adbdf17256ccb709e3efe0310f3ff",
+      "bytes": 12021
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/scooterBrakes.ts",
+      "sha256": "d75696e12b0f12f60fc62ca2adfb6cf4bc93c46d3d56e14f47fae8b9efd153d1",
+      "bytes": 5785
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/scooterLights.ts",
+      "sha256": "7ff91a7eef993ad6e09906d89458f1559b82689f3004040b03858301f7bc2105",
+      "bytes": 3796
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/skinAccessories.ts",
+      "sha256": "5abce886876bddeaa7932d8306b7d10d8b29df788f50c0a6bacb36959c88c47b",
+      "bytes": 2709
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/skinAccessoryModel.ts",
+      "sha256": "bb928bf686993750bdac877f20f34b8bf7a96e4fcf9f74a0bcfe0957ad82729f",
+      "bytes": 18026
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/staticBatch.ts",
+      "sha256": "b131115ccf74bf54168aeccf34ab52364da52eef3606f09edc35569a9db401af",
+      "bytes": 8783
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/staticBatchCulling.ts",
+      "sha256": "a54817db10459df0d1992847351ce2de36e927368b1b23f2abcf851203add790",
+      "bytes": 11695
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/truckModel.ts",
+      "sha256": "943b35bd94e91bb7a8c8de933c8704ae8cc25708fb66d013966f02866bf52dc1",
+      "bytes": 15594
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/vanModel.ts",
+      "sha256": "d7bf640f73debb1140e2ae869d878cf7a6976ff87da48e5976baeb83344d2c10",
+      "bytes": 6362
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/webgpuPresentationMaterial.ts",
+      "sha256": "581c5e58b1eb0cf9ec647d2fd5811155b8ccf76df0305dba8caa900eeb21770e",
+      "bytes": 1582
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/webgpuShadowRegistry.ts",
+      "sha256": "ea7546e69a733ca98a2ec314853ba3b650b9b59b500b48d3f21b7c228a0bd5aa",
+      "bytes": 3250
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/webgpuStaticBatchCulling.ts",
+      "sha256": "1709c7287f51a6408c20621a3bcd9edb1557e27cf3f8c17a37f25c2855d0f1ad",
+      "bytes": 4039
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/webgpuSurfaceMaterials.ts",
+      "sha256": "7dd9bd40d91c3e7bba91a46aefc7405aad2f5b950840ef69bdd13632e467f2d5",
+      "bytes": 8211
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/webgpuWaterMaterial.ts",
+      "sha256": "b496cd5e8acaad02d526f0d660510f5f1fcd08cff2a1ee2c4218cd89f9f087bd",
+      "bytes": 4040
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/workVehicle.ts",
+      "sha256": "345e859bda83fde299f4d255fc36870ab5eccda98bfc9e4103dd96a0a386e062",
+      "bytes": 3717
+    },
+    {
+      "path": "apps/dayun-kicker/src/ui/components/base/GameButton.vue",
+      "sha256": "913c264c779ee35c2ed0c4b5cc769240ce2879ef4d033d1f1f05424d71a9cf92",
+      "bytes": 546
+    },
+    {
+      "path": "apps/dayun-kicker/src/ui/components/base/GameNotice.vue",
+      "sha256": "3b45a09d71a78994e3e4dbfe1a3b4261ed03fb57d0c2961075584b6a295771f6",
+      "bytes": 914
+    },
+    {
+      "path": "apps/dayun-kicker/src/ui/components/base/GamePanel.vue",
+      "sha256": "ecf1553f31e5f27b28401a4a7d293cba0ffd5dcefcf2c9713351a06bbf1b0b89",
+      "bytes": 338
+    },
+    {
+      "path": "apps/dayun-kicker/src/ui/gamepadNavigation.ts",
+      "sha256": "46d649cf711d44a3b91ec78a090bcc1795d3113c99fd161d5cc20ba872bd3c6b",
+      "bytes": 5767
+    },
+    {
+      "path": "apps/dayun-kicker/src/ui/styles/button.css",
+      "sha256": "8abde981b9024bfec8d7b8bce132cb9001c133b110f8d07cf8a9e264acbde412",
+      "bytes": 1834
+    },
+    {
+      "path": "apps/dayun-kicker/src/ui/styles/panel.css",
+      "sha256": "2b446249e7529ef77f20ba9f2318bbe596793b1ab945c1157cd875a95fc3ca49",
+      "bytes": 468
+    },
+    {
+      "path": "apps/dayun-kicker/src/ui/styles/tokens.css",
+      "sha256": "03e523fbadba6f0d07cfa0caf3c606b76e981346b314c501ee40c8b3bdc35d9d",
+      "bytes": 3283
+    },
+    {
+      "path": "assets/desktop-releases/preview/latest.json",
+      "sha256": "4d8d6dea4c44faa1b285689b6aa216e9452909ff6e141f883b427d583f4d4446",
+      "bytes": 1091
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/cityMelee.ts",
+      "sha256": "d4fd6ca8717cdbbe52d331a3a1ffb105bb0c02759fa8a6e67ba37a4bfd6029e4",
+      "bytes": 3220
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/cityParking.ts",
+      "sha256": "938c729a120a7b7da5d72accdb958114817873a8a6518c006b42bdf9eea3029f",
+      "bytes": 1204
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/cityTypes.ts",
+      "sha256": "ad29f8685f6ee9fbba8649f38c9e7e720ca95cea1696f1a026d66e4005a3254b",
+      "bytes": 6259
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/cityWorld.ts",
+      "sha256": "e2c3ac199a86c06b6919f77f930b1353bd9a4a36047b6d7e0f4f78d55dcaf884",
+      "bytes": 14430
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/guangzhouOrigin.ts",
+      "sha256": "8816dc4869bf066ff18a0b51df11cf3631e452e22c7a2c67aff54ae3c89cc5a3",
+      "bytes": 372
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/guangzhouRouteData.ts",
+      "sha256": "4a3466935d98bc73cd7fa697a2388e0c92e96be12353612377966277c9d9322f",
+      "bytes": 9116
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/map.ts",
+      "sha256": "21fc4e60ea075f50714f2e55d0da458d26fc95ef4f6ecfc63ed81ad00c9c09a9",
+      "bytes": 5509
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/route.ts",
+      "sha256": "92220702c917ab7647672e14758d32509923b95bb183384b3190a27912034e5b",
+      "bytes": 4504
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/types.ts",
+      "sha256": "1db8148e28a69aa8d55eec563c973f6d45bd3b50393dee66b795d51834478cf1",
+      "bytes": 4711
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/weapons.ts",
+      "sha256": "d79e010a4148d5980e319eb5072db9531d9c2b178db8d07c13614aa5093f0295",
+      "bytes": 1599
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/vehicleInteractionRules.ts",
+      "bytes": 214,
+      "sha256": "8a7e9b18a046647c05d339ca4c08341b1e4e52dac30b73bf0ecec7117897bf53"
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/cityRules.ts",
+      "bytes": 33452,
+      "sha256": "17c6bd3a8ac2a5f2c2ff2c070226397c1a692280ccc66d0c6a3f3fb4d4079134"
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/cityVehicles.ts",
+      "bytes": 8478,
+      "sha256": "f4e167e55a7469fa9010da9170d800f748ca14be4988671462381b79ee1d17e0"
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/vehicleBoarding.ts",
+      "bytes": 3240,
+      "sha256": "e0c7fadf779897e2cafa018664cb018c69ddabf96fe420522462ee6db20f549d"
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/cityValidation.ts",
+      "bytes": 11028,
+      "sha256": "dd398f1c0f81550fe4edd919f7a3928f588228b7f003bf12997237b52463d1c9"
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/profile.ts",
+      "bytes": 1019,
+      "sha256": "6ecedf268c4a1382a8ea5994820eb1b23ccf710deb7e12cc10108ed9099d5adf"
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/knockback.ts",
+      "bytes": 1593,
+      "sha256": "fea1a78726f0c9f554530cdb9508bba1448005175fa33495c6199d76fbd4a15b"
+    },
+    {
+      "path": "packages/dayun-kicker-coop/src/vehicleBoarding.ts",
+      "bytes": 3240,
+      "sha256": "e0c7fadf779897e2cafa018664cb018c69ddabf96fe420522462ee6db20f549d"
+    }
+  ],
+  "mapPreview": [
+    {
+      "path": "docs/data/map-preview.json",
+      "bytes": 2815,
+      "sha256": "1a60777ae8439bcccd4c9fc2f53cbe128cefa10a505f8e0a83c9bafc3be7ef98"
+    },
+    {
+      "path": "docs/data/map-roads.json",
+      "bytes": 390337,
+      "sha256": "2b830a821bb0d811f95fac882aad7f3d98c8fec061079a9dba59df1404b4a8ec"
+    },
+    {
+      "path": "docs/data/map-shapes.json",
+      "bytes": 668351,
+      "sha256": "aa551442c3f055b805e4961ad7191396ca90dc56e39044c541aa6e2915f44b68"
+    }
+  ]
+}

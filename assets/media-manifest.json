@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "product": "dayun-kicker",
+  "version": "docs-map-2026-10-12",
+  "files": [
+    {
+      "path": "docs/data/map-roads.json",
+      "bytes": 390337,
+      "sha256": "2b830a821bb0d811f95fac882aad7f3d98c8fec061079a9dba59df1404b4a8ec",
+      "license": "ODbL-1.0",
+      "generation": "Derived documentation geometry from reviewed loadMapPreview export; upstream versions, attribution and SHA-256 are recorded in docs/data/map-preview.json and docs/data/game-reference.json.",
+      "url": "https://yunlefun-assets-prod-1325586649.cos.ap-shanghai.myqcloud.com/dayun-kicker/media/v1/2b830a821bb0d811f95fac882aad7f3d98c8fec061079a9dba59df1404b4a8ec.json"
+    },
+    {
+      "path": "docs/data/map-shapes.json",
+      "bytes": 668351,
+      "sha256": "aa551442c3f055b805e4961ad7191396ca90dc56e39044c541aa6e2915f44b68",
+      "license": "ODbL-1.0",
+      "generation": "Derived documentation geometry from reviewed loadMapPreview export; upstream versions, attribution and SHA-256 are recorded in docs/data/map-preview.json and docs/data/game-reference.json.",
+      "url": "https://yunlefun-assets-prod-1325586649.cos.ap-shanghai.myqcloud.com/dayun-kicker/media/v1/aa551442c3f055b805e4961ad7191396ca90dc56e39044c541aa6e2915f44b68.json"
+    }
+  ]
+}

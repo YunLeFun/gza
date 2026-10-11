@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "maxBlobBytes": 1048576,
+  "maxBinaryBytes": 262144,
+  "maxSvgBytes": 65536,
+  "manifestPath": "assets/media-manifest.json",
+  "mediaExtensions": [
+    ".png", ".jpg", ".jpeg", ".webp", ".avif", ".gif", ".apng", ".bmp", ".tif", ".tiff", ".ico", ".icns",
+    ".mp3", ".wav", ".ogg", ".flac", ".aac", ".m4a", ".opus",
+    ".mp4", ".mov", ".webm", ".mkv", ".avi",
+    ".glb", ".gltf", ".bin", ".blend", ".fbx", ".obj", ".mtl", ".usdz", ".ktx", ".ktx2", ".hdr", ".exr",
+    ".woff", ".woff2", ".ttf", ".otf", ".eot",
+    ".zip", ".7z", ".rar", ".gz", ".tgz", ".dmg", ".exe", ".dll", ".so", ".dylib", ".node"
+  ],
+  "exceptions": []
+}
