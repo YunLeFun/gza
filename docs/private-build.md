@@ -56,7 +56,7 @@ gh workflow run build-private-source.yml \
 
 只使用已经审核的可信提交。完整 SHA 固定构建输入，但不证明代码可信；安装依赖和构建脚本会执行源仓库代码。不要用此流程执行未审核的 PR 提交。
 
-流水线按源仓库 `package.json` 的 `packageManager` 安装 pnpm，并使用 frozen lockfile。COS 运行素材由旧仓库既有 `assets:pull --runtime-only` 按 SHA-256 恢复，不需要提供 COS 写入凭证。Web job 执行类型检查、单元测试、Web 构建、发布检查与性能预算；成功后，4 个独立 Chromium job 克隆同一个已校验 SHA，安装浏览器依赖，分别运行 `pnpm test:e2e --shard=N/4`。全部分片通过才算整体成功；失败不被忽略，也不缩减既有测试范围。文档检查可选，桌面发行使用独立流程。
+流水线按源仓库 `package.json` 的 `packageManager` 安装 pnpm，并使用 frozen lockfile。COS 运行素材由旧仓库既有 `assets:pull --runtime-only` 按 SHA-256 恢复，不需要提供 COS 写入凭证。Web job 执行类型检查、单元测试、Web 构建、发布检查与性能预算。单元测试使用一个 worker，避免完整地图和物理测试在 hosted runner 上争抢 CPU；保留全部断言和源仓库的测试时限。成功后，4 个独立 Chromium job 克隆同一个已校验 SHA，安装浏览器依赖，分别运行 `pnpm test:e2e --shard=N/4`。全部分片通过才算整体成功；失败不被忽略，也不缩减既有测试范围。文档检查可选，桌面发行使用独立流程。
 
 初版没有 artifact 或 cache 上传，构建文件在一次性的 GitHub-hosted runner 中使用，任务结束后不提供下载。需要下载、部署或发布时，先确定私有存储目标及素材许可，再增加相应步骤。
 

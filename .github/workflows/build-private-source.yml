@@ -90,7 +90,9 @@ jobs:
         run: pnpm typecheck
 
       - name: Unit tests
-        run: pnpm test
+        # Full-map physics tests share CPU with other workers on hosted runners.
+        # Keep the source timeouts and assertions intact while avoiding contention.
+        run: pnpm test --maxWorkers=1
 
       - name: Build web application
         run: pnpm build
