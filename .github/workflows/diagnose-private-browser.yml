@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Diagnose browser rendering
+run-name: Diagnose rendering for ${{ inputs.source_sha }}
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Trusted dayun-kicker revision (full SHA)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  rendering:
+    if: ${{ github.repository == 'YunLeFun/gza' && github.ref == 'refs/heads/main' }}
+    name: Renderer (${{ matrix.renderer }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            renderer: linux-headless
+            mesa: '0'
+          - runner: ubuntu-latest
+            renderer: linux-mesa
+            mesa: '1'
+          - runner: windows-latest
+            renderer: windows
+            mesa: '0'
+    defaults:
+      run:
+        shell: bash
+        working-directory: source
+    steps:
+      - name: Validate trusted revision
+        working-directory: ${{ github.workspace }}
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: '[[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]]'
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/dayun-kicker
+          ref: ${{ inputs.source_sha }}
+          token: ${{ secrets.PRIVATE_SOURCE_TOKEN }}
+          path: source
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Prepare locked dependencies and browser
+        run: |
+          corepack enable
+          corepack install
+          pnpm install --frozen-lockfile
+          pnpm assets:pull --runtime-only
+          pnpm exec playwright install --with-deps chromium
+      - name: Prepare diagnostic browser configuration
+        run: |
+          cat > playwright.renderer-check.config.ts <<'TS'
+          import { defineConfig } from '@playwright/test';
+          import base from './playwright.config';
+          export default defineConfig(base, {
+            retries: 0,
+            reporter: 'line',
+            use: { launchOptions: process.env.PLAYWRIGHT_USE_MESA === '1'
+              ? { args: ['--use-gl=angle', '--use-angle=gl', '--ignore-gpu-blocklist'] } : {} },
+            webServer: { ...base.webServer!, command: String(base.webServer!.command).replace(/^exec /, '') },
+          });
+          TS
+      - name: Reproduce audio interaction using the selected renderer
+        env:
+          PLAYWRIGHT_USE_MESA: ${{ matrix.mesa }}
+        run: |
+          if [[ "$PLAYWRIGHT_USE_MESA" == '1' ]]; then
+            xvfb-run --auto-servernum pnpm exec playwright test --config=playwright.renderer-check.config.ts e2e/audio.spec.ts --grep 'matches district music' --headed
+          else
+            pnpm exec playwright test --config=playwright.renderer-check.config.ts e2e/audio.spec.ts --grep 'matches district music'
+          fi
