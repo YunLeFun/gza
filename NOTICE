@@ -1,0 +1,12 @@
+GZA build and migration preparation
+Copyright 2026 YunLeFun contributors
+
+This repository contains build configuration and documentation only.
+It does not contain or relicense the private dayun-kicker game source,
+its Git history, media, third-party dependencies, or build outputs.
+
+Original build configuration is licensed under Apache-2.0.
+Original explanatory documentation is licensed under CC BY 4.0.
+See LICENSES.md for the applicable scope and exclusions.
+
+This notice does not grant trademark rights or imply endorsement.

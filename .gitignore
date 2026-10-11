@@ -1,0 +1,20 @@
+# Private source clones and generated files must never enter this repository.
+source/
+private-source/
+node_modules/
+.cache/
+dist/
+artifacts/
+artifacts.local/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ecdsa
+id_ed25519
