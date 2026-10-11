@@ -166,6 +166,8 @@ jobs:
       - name: Run browser end-to-end tests
         env:
           E2E_SHARD: ${{ matrix.shard }}
+          PLAYWRIGHT_USE_MESA: '1'
         # Each test owns its page/context; keep one browser worker per runner.
         # Shard by test rather than file so long graphics suites do not bunch up.
-        run: pnpm test:e2e --fully-parallel --shard="${E2E_SHARD}/16"
+        # Xvfb/Mesa avoids Chromium's slow default software graphics path.
+        run: xvfb-run --auto-servernum pnpm test:e2e --fully-parallel --shard="${E2E_SHARD}/16"
