@@ -25,6 +25,8 @@ jobs:
         run: corepack enable && corepack install
       - name: Check Git asset policy
         run: node scripts/check-git-assets.mjs
+      - name: Test signed build webhook
+        run: node --test ci/tests/github-webhook.test.mjs
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
       - name: Check documentation types and build

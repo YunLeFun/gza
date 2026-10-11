@@ -1,0 +1,7 @@
+{
+  "name": "gza-ci-webhook",
+  "private": true,
+  "type": "commonjs",
+  "license": "Apache-2.0",
+  "main": "index.js"
+}

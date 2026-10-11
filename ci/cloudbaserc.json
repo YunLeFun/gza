@@ -1,0 +1,19 @@
+{
+  "envId": "yunlefun-8g7ybcxc7345c490",
+  "functionRoot": "functions",
+  "functions": [
+    {
+      "name": "gza-ci-webhook",
+      "type": "Event",
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "timeout": 12,
+      "memorySize": 256,
+      "envVariables": {
+        "GZA_DISPATCH_TOKEN": "{{env.GZA_DISPATCH_TOKEN}}",
+        "GITHUB_WEBHOOK_SECRET": "{{env.GITHUB_WEBHOOK_SECRET}}"
+      },
+      "ignore": ["node_modules", "*.test.*"]
+    }
+  ]
+}

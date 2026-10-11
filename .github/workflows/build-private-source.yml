@@ -27,6 +27,8 @@ jobs:
     if: ${{ github.repository == 'YunLeFun/gza' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    outputs:
+      source_sha: ${{ inputs.source_sha }}
     defaults:
       run:
         shell: bash
@@ -115,3 +117,51 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm docs:typecheck
           pnpm docs:build
+
+  browser:
+    name: Browser E2E (${{ matrix.shard }}/4)
+    needs: web
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    defaults:
+      run:
+        shell: bash
+        working-directory: source
+    steps:
+      - name: Checkout verified private source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/dayun-kicker
+          ref: ${{ needs.web.outputs.source_sha }}
+          token: ${{ secrets.PRIVATE_SOURCE_TOKEN }}
+          path: source
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      - name: Enable the source repository's pinned pnpm version
+        run: |
+          corepack enable
+          corepack install
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Restore and verify pinned media
+        run: pnpm assets:pull --runtime-only
+
+      - name: Install Chromium and browser dependencies
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run browser end-to-end tests
+        env:
+          E2E_SHARD: ${{ matrix.shard }}
+        run: pnpm test:e2e --shard="${E2E_SHARD}/4"
