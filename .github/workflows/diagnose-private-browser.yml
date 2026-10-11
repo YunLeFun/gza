@@ -61,10 +61,11 @@ jobs:
           cat > playwright.renderer-check.config.ts <<'TS'
           import { defineConfig } from '@playwright/test';
           import base from './playwright.config';
-          export default defineConfig(base, {
+          export default defineConfig({
+            ...base,
             retries: 0,
             reporter: 'line',
-            use: { launchOptions: process.env.PLAYWRIGHT_USE_MESA === '1'
+            use: { ...base.use, launchOptions: process.env.PLAYWRIGHT_USE_MESA === '1'
               ? { args: ['--use-gl=angle', '--use-angle=gl', '--ignore-gpu-blocklist'] } : {} },
             webServer: { ...base.webServer!, command: String(base.webServer!.command).replace(/^exec /, '') },
           });
