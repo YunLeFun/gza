@@ -21,14 +21,13 @@ jobs:
       matrix:
         include:
           - runner: ubuntu-latest
-            renderer: linux-headless
-            mesa: '0'
-          - runner: ubuntu-latest
-            renderer: linux-mesa
+            renderer: mesa-headless
             mesa: '1'
-          - runner: windows-latest
-            renderer: windows
-            mesa: '0'
+            headed: '0'
+          - runner: ubuntu-latest
+            renderer: mesa-headed
+            mesa: '1'
+            headed: '1'
     defaults:
       run:
         shell: bash
@@ -65,17 +64,16 @@ jobs:
             ...base,
             retries: 0,
             reporter: 'line',
-            use: { ...base.use, launchOptions: process.env.PLAYWRIGHT_USE_MESA === '1'
+            use: { ...base.use, headless: true, launchOptions: process.env.PLAYWRIGHT_USE_MESA === '1'
               ? { args: ['--use-gl=angle', '--use-angle=gl', '--ignore-gpu-blocklist'] } : {} },
             webServer: { ...base.webServer!, command: String(base.webServer!.command).replace(/^exec /, '') },
           });
           TS
-      - name: Reproduce audio interaction using the selected renderer
+      - name: Compare graphics and multi-touch interactions
         env:
           PLAYWRIGHT_USE_MESA: ${{ matrix.mesa }}
+          PLAYWRIGHT_HEADED: ${{ matrix.headed }}
         run: |
-          if [[ "$PLAYWRIGHT_USE_MESA" == '1' ]]; then
-            xvfb-run --auto-servernum pnpm exec playwright test --config=playwright.renderer-check.config.ts e2e/audio.spec.ts --grep 'matches district music' --headed
-          else
-            pnpm exec playwright test --config=playwright.renderer-check.config.ts e2e/audio.spec.ts --grep 'matches district music'
-          fi
+          extra=()
+          if [[ "$PLAYWRIGHT_HEADED" == '1' ]]; then extra+=(--headed); fi
+          xvfb-run --auto-servernum pnpm exec playwright test --config=playwright.renderer-check.config.ts e2e/audio.spec.ts e2e/game.spec.ts e2e/curves.spec.ts --grep 'matches district music|kicks with a second finger|plays a curved road|keeps the mobile map' "${extra[@]}"
