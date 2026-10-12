@@ -96,7 +96,7 @@ export default defineConfig({
           { text: "常见问题", link: "/guide/faq" },
         ],
       },
-      { text: "参与项目", items: [{ text: "开发与文档维护", link: "/development" }, { text: "工程文档", link: "/engineering" }, { text: "许可证", link: "/licensing" }] },
+      { text: "参与项目", items: [{ text: "开发与文档维护", link: "/development" }, { text: "工程文档", link: "/engineering" }, { text: "路线图", link: "/roadmap" }, { text: "AI 玩法设计（草案）", link: "/ai-gameplay" }, { text: "许可证", link: "/licensing" }] },
     ],
     search: {
       provider: "local",

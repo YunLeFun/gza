@@ -10,6 +10,18 @@ The first release is **GZA：暴力电驴**. **GZA** stands for **GuangZhou Acti
 - [ ] Complete reproducible map imports and bounded cell streaming before expanding the playable area.
 - [x] Unify app display names and launch / game-center branding as GZA：暴力电驴, preserving app identifiers, saves and purchased entitlements.
 
+## AI 自定义玩法（后续设计） {#ai-gameplay}
+
+[玩法包、MCP 与 Skills 设计草案](ai-gameplay.md)已于 2026-10-13 整理；以下均为待实现能力，在现有城市任务体验与性能门禁完成后分阶段推进，不承诺发布日期。
+
+- [ ] P0：冻结 `dayun-gameplay` 玩法包 schema、地图 / 规则依赖、能力目录、预算、校验与错误契约；准备配送、探索和分支对白模板。
+- [ ] P1：实现统一校验、本地导入、受控任务执行和隔离存档；验收十分钟任务、两个结局、失败重试、恢复与离线游玩，不写官方奖励或成绩。
+- [ ] P2：提供 MCP 能力 / 地点查询、草稿版本管理、校验、独立试玩、结果读取和导出；发布创作 Skill，验收“一句话创作 → 试玩 → 自然语言修改 → 再试玩 → 导出”闭环。
+- [ ] P3：增加固定版本分享与合作试玩，匹配玩法包 / 地图 / 宿主规则 hash 和种子，验收更新失败回退与权威端一致性；再开放受控救援 / 战斗模板。
+- [ ] P4：探索实时 AI 导演与 NPC，限制为离散事件后的动作提案，验收费用控制、超时 / 断线兜底、过期回复拒绝及读档不重复执行。
+
+玩法包依赖固定地图，与[城市地图包和 Workshop](desktop-steam.md#创意工坊-城市地图包)分开管理。生成内容复用同一宿主契约；MCP 提供创作工具，Skills 提供创作流程，实时模型不是离线游玩的必要依赖。
+
 ## Desktop and Steam
 
 - [x] Share standard gamepad driving, camera, actions and menu navigation across races and free ride.

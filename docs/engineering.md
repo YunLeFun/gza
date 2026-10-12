@@ -39,6 +39,7 @@ docs
 - [云乐坊云端合作：复用 Play、射击同步与发布](cloud-zombie-coop.md)
 - [双座电驴与僵尸突围实施计划](two-seat-zombie-coop-plan.md)
 - [路线图](roadmap.md)
+- [AI 自定义玩法：玩法包、MCP 与 Skills 设计草案](ai-gameplay.md)
 - [UI 组件复用约定](ui-components.md)
 - [按需加载与离线资源](lazy-loading.md)
 - [Steam App ID 与抢先体验发布](steam-release.md)
