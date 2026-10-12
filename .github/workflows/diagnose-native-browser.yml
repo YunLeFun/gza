@@ -25,6 +25,7 @@ on:
         type: choice
         options:
           - mesa-dawn
+          - mesa-webgl
           - headless
 permissions:
   contents: read
@@ -77,7 +78,7 @@ jobs:
       - name: Verify Vulkan rendering and interaction regressions
         env:
           PLAYWRIGHT_USE_MESA: ${{ inputs.driver == 'headless' && '0' || '1' }}
-          PLAYWRIGHT_USE_VULKAN: '1'
+          PLAYWRIGHT_USE_VULKAN: ${{ inputs.driver == 'mesa-dawn' && '1' || '0' }}
           E2E_GREP: ${{ inputs.test_grep }}
           DEBUG: pw:browser
           E2E_SHARD: ${{ matrix.shard }}
