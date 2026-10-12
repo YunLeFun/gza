@@ -134,6 +134,16 @@ jobs:
         shell: bash
         working-directory: source
     steps:
+      - name: Checkout public CI runner
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/gza
+          ref: ${{ github.sha }}
+          path: public-ci
+          persist-credentials: false
+          sparse-checkout: scripts/run-private-e2e.mjs
+          sparse-checkout-cone-mode: false
+
       - name: Checkout verified private source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -167,7 +177,7 @@ jobs:
         env:
           E2E_SHARD: ${{ matrix.shard }}
           PLAYWRIGHT_USE_MESA: '1'
-        # Each test owns its page/context; keep one browser worker per runner.
-        # Shard by test rather than file so long graphics suites do not bunch up.
-        # Xvfb/Mesa avoids Chromium's slow default software graphics path.
-        run: xvfb-run --auto-servernum pnpm test:e2e --fully-parallel --shard="${E2E_SHARD}/16"
+        # Enumerate the source's entire suite, then run each assigned case once
+        # in a fresh process. Keep GPU/audio lifetime independent between cases,
+        # retaining multi-client cases, source retries and every assertion.
+        run: xvfb-run --auto-servernum node ../public-ci/scripts/run-private-e2e.mjs "${E2E_SHARD}/16"
