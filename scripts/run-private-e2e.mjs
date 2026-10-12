@@ -132,3 +132,5 @@ for (const [index, description] of tests.entries()) {
 }
 console.log(`Shard ${shard} completed all ${tests.length} selections: ${JSON.stringify(totals)}`);
 if (failed) { console.error(`${failed} test invocations failed`); process.exitCode = 1; }
+// Owned listeners keep Node alive, so cleanup must run before waiting for exit.
+stopServers();
