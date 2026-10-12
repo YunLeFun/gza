@@ -49,6 +49,8 @@ docs
 - [源码、素材与品牌许可证方案](open-source-licensing.md)
 - [省二医琶洲院区建模与参考流程](guangdong-second-hospital.md)
 - [街区渲染性能、GPU 采样与预算](rendering-performance.md)
+- [游戏性能优化手册、后续优先级与 Goal 模板](game-performance-playbook.md)
+- [卡通画面氛围、社区参考与人物弹性动画](cartoon-atmosphere.md)
 - [丽园雅庭夜间实景精修](liyuan-night-reference.md)
 - [EdgeOne Pages 部署](deploy-edgeone.md)
 - [SSO 0.4 + 同源 BFF](auth-bff.md)
