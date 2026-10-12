@@ -36,7 +36,8 @@ const needs = {
   play: tests.some(title => title.includes('cloud-coop.spec.ts › two authenticated browsers')),
   delivery: tests.some(title => title.includes('coop-delivery.spec.ts › two real clients collect')),
   production: tests.some(title => title.includes('city-coop.spec.ts ›') && title.includes('production')),
-  cityInput: tests.some(title => title.includes('city-coop.spec.ts ›') && /four real city clients|four-player city HUD|one city player can create/.test(title)),
+  cityInput: tests.some(title => title.includes('city-coop.spec.ts ›') && /four real city clients|four-player city HUD|one city player can create/.test(title)
+    || title.includes('city-vehicles.spec.ts › one outbreak room')),
 };
 console.log(`Shard ${shard}: ${tests.length} tests, each with a fresh browser process`);
 if (process.argv.includes('--plan')) {
@@ -124,9 +125,10 @@ for (const [index, description] of tests.entries()) {
   // A separate invocation releases Chromium's GPU/audio process between cases.
   // Multi-page and multi-client interactions within one case stay together.
   const testEnv = { ...runEnv, PLAYWRIGHT_JSON_OUTPUT_FILE: reportFile };
-  // Only the three noncombat input/network journeys use the training authority.
+  // Only the four noncombat input/network journeys use the training authority.
   // Combat and production city cases retain their complete ordinary world.
-  if (!description.includes('city-coop.spec.ts ›') || !/four real city clients|four-player city HUD|one city player can create/.test(description))
+  if (!(description.includes('city-coop.spec.ts ›') && /four real city clients|four-player city HUD|one city player can create/.test(description)
+    || description.includes('city-vehicles.spec.ts › one outbreak room')))
     delete testEnv.CITY_INPUT_FIXTURE_URL;
   // Exercise Dawn in the renderer suites. Keep the remaining software-rendered
   // journeys on Mesa OpenGL, including their original cold-start/frame budgets.
