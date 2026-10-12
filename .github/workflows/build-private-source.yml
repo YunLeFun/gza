@@ -120,6 +120,48 @@ jobs:
           pnpm docs:typecheck
           pnpm docs:build
 
+  performance:
+    name: Mobile cold-start performance budgets
+    needs: web
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash
+        working-directory: source
+    steps:
+      - name: Checkout public CI runner
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/gza
+          ref: ${{ github.sha }}
+          path: public-ci
+          persist-credentials: false
+          sparse-checkout: scripts/run-private-e2e.mjs
+          sparse-checkout-cone-mode: false
+      - name: Checkout verified private source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/dayun-kicker
+          ref: ${{ needs.web.outputs.source_sha }}
+          token: ${{ secrets.PRIVATE_SOURCE_TOKEN }}
+          path: source
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Prepare the locked production build and browser
+        run: |
+          corepack enable
+          corepack install
+          pnpm install --frozen-lockfile
+          pnpm assets:pull --runtime-only
+          pnpm build
+          pnpm exec playwright install --with-deps chromium
+      - name: Run every production performance case with its original budgets
+        run: node ../public-ci/scripts/run-private-e2e.mjs 1/1 --performance
+
   browser:
     name: Browser E2E (${{ matrix.shard }}/16)
     needs: web

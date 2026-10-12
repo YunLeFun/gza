@@ -8,8 +8,9 @@ const shard = process.argv[2];
 if (!/^\d+\/\d+$/.test(shard ?? '')) throw new Error('Provide a Playwright shard, e.g. 3/16');
 const directory = mkdtempSync(join(tmpdir(), 'gza-e2e-'));
 const enumeration = join(directory, 'enumeration.json');
+const performance = process.argv.includes('--performance');
 const diagnosticGrep = process.argv.find(value => value.startsWith('--grep='))?.slice(7);
-const listed = spawnSync('pnpm', ['test:e2e', '--fully-parallel', `--shard=${shard}`, '--list', '--reporter=json',
+const listed = spawnSync('pnpm', [performance ? 'test:performance' : 'test:e2e', '--fully-parallel', `--shard=${shard}`, '--list', '--reporter=json',
   ...(diagnosticGrep ? ['--grep', diagnosticGrep] : [])], {
   stdio: 'inherit', env: { ...process.env, PLAYWRIGHT_JSON_OUTPUT_FILE: enumeration },
 });
@@ -78,7 +79,7 @@ function stopServers() {
 }
 for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => { stopServers(); process.exit(1); });
 process.once('exit', stopServers);
-if (!runEnv.PLAYWRIGHT_BASE_URL) {
+if (!performance && !runEnv.PLAYWRIGHT_BASE_URL) {
   runEnv.PLAYWRIGHT_BASE_URL = 'http://127.0.0.1:43173';
   await startServer('vite', 'node', ['apps/dayun-kicker/node_modules/vite/bin/vite.js', 'apps/dayun-kicker',
     '--host', '127.0.0.1', '--port', '43173', '--strictPort'], runEnv.PLAYWRIGHT_BASE_URL);
@@ -119,6 +120,7 @@ for (const [index, description] of tests.entries()) {
   if (runEnv.PLAYWRIGHT_USE_MESA === '1' && runEnv.PLAYWRIGHT_USE_VULKAN === '1' && !diagnosticGrep
     && !/render-backends?(?:-settings)?\.spec\.ts/.test(description)) testEnv.PLAYWRIGHT_USE_VULKAN = '0';
   const run = spawnSync('pnpm', ['exec', 'playwright', 'test', `--test-list=${selection}`,
+    ...(performance ? ['--config=playwright.performance.config.ts'] : []),
     '--workers=1', '--reporter=github,json', `--output=${join(directory, `results-${index}`)}`], {
     stdio: 'inherit', env: testEnv,
   });
