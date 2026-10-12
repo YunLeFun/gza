@@ -12,14 +12,25 @@ on:
         description: Test titles for this targeted diagnosis (full CI remains unfiltered)
         default: plays a curved road|keeps the mobile map|keeps street lighting|keeps Tencent entrance|captures real reflected|WebGPU
         type: string
+      shards:
+        description: Independent diagnostic runners
+        default: '[1,2,3,4,5]'
+        type: choice
+        options:
+          - '[1,2,3,4,5]'
+          - '[1]'
 permissions:
   contents: read
 jobs:
   rendering:
     if: ${{ github.repository == 'YunLeFun/gza' && github.ref == 'refs/heads/main' }}
-    name: Vulkan Chromium rendering
+    name: Vulkan Chromium rendering (${{ matrix.shard }})
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(inputs.shards) }}
     defaults:
       run:
         shell: bash
@@ -62,4 +73,6 @@ jobs:
           PLAYWRIGHT_USE_VULKAN: '1'
           E2E_GREP: ${{ inputs.test_grep }}
           DEBUG: pw:browser
-        run: xvfb-run --auto-servernum node ../public-ci/scripts/run-private-e2e.mjs 1/1 "--grep=${E2E_GREP}"
+          E2E_SHARD: ${{ matrix.shard }}
+          E2E_TOTAL: ${{ strategy.job-total }}
+        run: xvfb-run --auto-servernum node ../public-ci/scripts/run-private-e2e.mjs "${E2E_SHARD}/${E2E_TOTAL}" "--grep=${E2E_GREP}"
