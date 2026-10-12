@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
-name: Diagnose native browser
-run-name: Diagnose native rendering for ${{ inputs.source_sha }}
+name: Diagnose Vulkan browser
+run-name: Diagnose Vulkan rendering for ${{ inputs.source_sha }}
 on:
   workflow_dispatch:
     inputs:
@@ -13,8 +13,8 @@ permissions:
 jobs:
   rendering:
     if: ${{ github.repository == 'YunLeFun/gza' && github.ref == 'refs/heads/main' }}
-    name: Native Chromium rendering
-    runs-on: macos-latest
+    name: Vulkan Chromium rendering
+    runs-on: ubuntu-latest
     timeout-minutes: 25
     defaults:
       run:
@@ -43,5 +43,8 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm assets:pull --runtime-only
           pnpm exec playwright install --with-deps chromium
-      - name: Verify native rendering and interaction regressions
-        run: pnpm exec playwright test e2e/curves.spec.ts e2e/district.spec.ts e2e/water-rendering.spec.ts --grep 'plays a curved road|keeps the mobile map|keeps street lighting|keeps Tencent entrance|captures real reflected' --retries=0
+      - name: Verify Vulkan rendering and interaction regressions
+        env:
+          PLAYWRIGHT_USE_MESA: '1'
+          PLAYWRIGHT_USE_VULKAN: '1'
+        run: xvfb-run --auto-servernum pnpm exec playwright test e2e/curves.spec.ts e2e/district.spec.ts e2e/water-rendering.spec.ts e2e/render-backends.spec.ts --grep 'plays a curved road|keeps the mobile map|keeps street lighting|keeps Tencent entrance|captures real reflected|WebGPU' --retries=0
