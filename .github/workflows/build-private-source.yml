@@ -200,6 +200,7 @@ jobs:
         env:
           E2E_SHARD: ${{ matrix.shard }}
           PLAYWRIGHT_USE_MESA: '1'
+          PLAYWRIGHT_USE_VULKAN: '1'
           PLAY_SOURCE_DIRECTORY: ${{ github.workspace }}/play-authority
         # Enumerate the source's entire suite, then run each assigned case once
         # in a fresh process. Keep GPU/audio lifetime independent between cases,
