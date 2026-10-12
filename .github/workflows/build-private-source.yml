@@ -18,7 +18,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: private-source-build
+  # Verify each immutable revision to completion even when main advances.
+  group: private-source-build-${{ inputs.source_sha }}
   cancel-in-progress: true
 
 jobs:

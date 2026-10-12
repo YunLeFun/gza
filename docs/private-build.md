@@ -24,6 +24,8 @@ gh secret set PRIVATE_SOURCE_TOKEN --repo YunLeFun/gza
 
 转发函数校验原始请求字节的 HMAC-SHA256 签名，只接受 `YunLeFun/dayun-kicker` 的 `refs/heads/main` 推送，忽略分支删除及其他事件。取推送的完整 `after` SHA，以 `main` 上的固定 `build-private-source.yml` 发起构建。最近 100 次派发中已有运行中或成功的相同 SHA 时，不重复启动；失败的投递或构建可从源仓库 Webhook 的 Recent Deliveries 手动重新投递。
 
+工作流按完整源码 SHA 划分并发组，不同提交的构建可以各自完成；新的主线推送不会取消正在核验的另一份源码。相同 SHA 的重复手动运行仍会替换正在运行的旧任务，Webhook 继续对运行中或已成功的相同 SHA 去重。
+
 凭证分开配置：
 
 - `PRIVATE_SOURCE_TOKEN`：仍仅有源仓库 Contents 只读权限，保存在 gza Actions Secrets。
