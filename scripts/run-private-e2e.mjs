@@ -113,9 +113,14 @@ for (const [index, description] of tests.entries()) {
   console.log(`\nTest ${index + 1}/${tests.length}: ${description}`);
   // A separate invocation releases Chromium's GPU/audio process between cases.
   // Multi-page and multi-client interactions within one case stay together.
+  const testEnv = { ...runEnv, PLAYWRIGHT_JSON_OUTPUT_FILE: reportFile };
+  // Exercise Dawn in the renderer suites. Keep the remaining software-rendered
+  // journeys on Mesa OpenGL, including their original cold-start/frame budgets.
+  if (runEnv.PLAYWRIGHT_USE_MESA === '1' && runEnv.PLAYWRIGHT_USE_VULKAN === '1' && !diagnosticGrep
+    && !/render-backends?(?:-settings)?\.spec\.ts/.test(description)) testEnv.PLAYWRIGHT_USE_VULKAN = '0';
   const run = spawnSync('pnpm', ['exec', 'playwright', 'test', `--test-list=${selection}`,
     '--workers=1', '--reporter=github,json', `--output=${join(directory, `results-${index}`)}`], {
-    stdio: 'inherit', env: { ...runEnv, PLAYWRIGHT_JSON_OUTPUT_FILE: reportFile },
+    stdio: 'inherit', env: testEnv,
   });
   try {
     const report = JSON.parse(readFileSync(reportFile, 'utf8'));
