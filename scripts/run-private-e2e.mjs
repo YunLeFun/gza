@@ -59,6 +59,9 @@ if (needs.play) {
   runEnv.VITE_YLF_COMPETITION_API_ORIGIN = runEnv.PLAY_COOP_FIXTURE_URL;
 }
 async function startServer(name, command, args, url, options = {}) {
+  let existing = false;
+  try { await fetch(url, { signal: AbortSignal.timeout(2_000) }); existing = true; } catch { /* No owned fixture yet. */ }
+  if (existing) throw new Error(`${name}: unexpected existing listener at ${url}; refusing to test another checkout`);
   const log = openSync(join(directory, `${name}.log`), 'w');
   const child = spawn(command, args, { cwd: options.cwd, env: { ...runEnv, ...options.env },
     detached: true, stdio: ['ignore', log, log] });
@@ -128,7 +131,8 @@ for (const [index, description] of tests.entries()) {
   // Exercise Dawn in the renderer suites. Keep the remaining software-rendered
   // journeys on Mesa OpenGL, including their original cold-start/frame budgets.
   if (runEnv.PLAYWRIGHT_USE_MESA === '1' && runEnv.PLAYWRIGHT_USE_VULKAN === '1' && !diagnosticGrep
-    && !/render-backends?(?:-settings)?\.spec\.ts/.test(description)) testEnv.PLAYWRIGHT_USE_VULKAN = '0';
+    && !/render-backends?(?:-settings)?\.spec\.ts/.test(description)
+    && !(description.includes('district-zombies.spec.ts') && description.includes('WebGPU challenge preparation'))) testEnv.PLAYWRIGHT_USE_VULKAN = '0';
   const run = spawnSync('pnpm', ['exec', 'playwright', 'test', `--test-list=${selection}`,
     ...(performance ? ['--config=playwright.performance.config.ts'] : []),
     '--workers=1', '--reporter=github,json', `--output=${join(directory, `results-${index}`)}`], {
