@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: Apache-2.0
+name: Diagnose native browser
+run-name: Diagnose native rendering for ${{ inputs.source_sha }}
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Trusted dayun-kicker revision (full SHA)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  rendering:
+    if: ${{ github.repository == 'YunLeFun/gza' && github.ref == 'refs/heads/main' }}
+    name: Native Chromium rendering
+    runs-on: macos-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash
+        working-directory: source
+    steps:
+      - name: Validate trusted revision
+        working-directory: ${{ github.workspace }}
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: '[[ "$SOURCE_SHA" =~ ^[0-9a-fA-F]{40}$ ]]'
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/dayun-kicker
+          ref: ${{ inputs.source_sha }}
+          token: ${{ secrets.PRIVATE_SOURCE_TOKEN }}
+          path: source
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Prepare locked dependencies and browser
+        run: |
+          corepack enable
+          corepack install
+          pnpm install --frozen-lockfile
+          pnpm assets:pull --runtime-only
+          pnpm exec playwright install --with-deps chromium
+      - name: Verify native rendering and interaction regressions
+        run: pnpm exec playwright test e2e/curves.spec.ts e2e/district.spec.ts e2e/water-rendering.spec.ts --grep 'plays a curved road|keeps the mobile map|keeps street lighting|keeps Tencent entrance|captures real reflected' --retries=0
