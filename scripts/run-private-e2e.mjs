@@ -100,7 +100,7 @@ if (needs.delivery && !runEnv.COOP_DELIVERY_FIXTURE_URL) {
     `${runEnv.COOP_DELIVERY_FIXTURE_URL}/coop.html`);
 }
 if (needs.cityInput && !runEnv.CITY_INPUT_FIXTURE_URL) {
-  runEnv.CITY_INPUT_FIXTURE_URL = 'http://127.0.0.1:43175/city-coop.html';
+  runEnv.CITY_INPUT_FIXTURE_URL = 'http://127.0.0.1:43175/coop.html';
   await startServer('city-input', 'node', ['e2e/helpers/coopDeliveryServer.mjs', '43175', 'city-input'],
     runEnv.CITY_INPUT_FIXTURE_URL);
 }
