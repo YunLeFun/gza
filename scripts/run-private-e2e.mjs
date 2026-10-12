@@ -65,12 +65,15 @@ async function startServer(name, command, args, url, options = {}) {
   const deadline = Date.now() + 120_000;
   while (Date.now() < deadline) {
     if (child.exitCode !== null) break;
-    try { if ((await fetch(url)).ok) return; } catch { /* Wait for the owned listener. */ }
+    try { if ((await fetch(url, { signal: AbortSignal.timeout(2_000) })).ok) return; } catch { /* Wait for the owned listener. */ }
     await new Promise(resolve => setTimeout(resolve, 200));
   }
   throw new Error(`${name} did not start; inspect ${join(directory, `${name}.log`)}`);
 }
+let stopped = false;
 function stopServers() {
+  if (stopped) return;
+  stopped = true;
   for (const child of servers.reverse()) try { process.kill(-child.pid, 'SIGTERM'); } catch { /* Already stopped. */ }
 }
 for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => { stopServers(); process.exit(1); });
