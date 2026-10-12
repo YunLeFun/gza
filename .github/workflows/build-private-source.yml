@@ -170,6 +170,29 @@ jobs:
       - name: Restore and verify pinned media
         run: pnpm assets:pull --runtime-only
 
+      - name: Identify local authorities required by this shard
+        id: fixtures
+        run: node ../public-ci/scripts/run-private-e2e.mjs "${{ matrix.shard }}/16" --plan
+
+      - name: Checkout pinned Play test authority
+        if: ${{ steps.fixtures.outputs.play == 'true' }}
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/play
+          ref: 48448e3cce22e9ef2b0b50f4b23049c3ee9e7198
+          token: ${{ secrets.PLAY_SOURCE_TOKEN }}
+          path: play-authority
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Prepare the real local Play authority
+        if: ${{ steps.fixtures.outputs.play == 'true' }}
+        working-directory: play-authority
+        run: |
+          corepack install
+          pnpm install --frozen-lockfile --filter @yunlefun/play-game-server...
+          pnpm --filter @yunlefun/play-game-server^... build
+
       - name: Install Chromium and browser dependencies
         run: pnpm exec playwright install --with-deps chromium
 
@@ -177,6 +200,7 @@ jobs:
         env:
           E2E_SHARD: ${{ matrix.shard }}
           PLAYWRIGHT_USE_MESA: '1'
+          PLAY_SOURCE_DIRECTORY: ${{ github.workspace }}/play-authority
         # Enumerate the source's entire suite, then run each assigned case once
         # in a fresh process. Keep GPU/audio lifetime independent between cases,
         # retaining multi-client cases, source retries and every assertion.

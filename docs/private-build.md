@@ -56,13 +56,15 @@ gh workflow run build-private-source.yml \
 
 只使用已经审核的可信提交。完整 SHA 固定构建输入，但不证明代码可信；安装依赖和构建脚本会执行源仓库代码。不要用此流程执行未审核的 PR 提交。
 
-流水线按源仓库 `package.json` 的 `packageManager` 安装 pnpm，并使用 frozen lockfile。COS 运行素材由旧仓库既有 `assets:pull --runtime-only` 按 SHA-256 恢复，不需要提供 COS 写入凭证。Web job 执行类型检查、单元测试、Web 构建、发布检查与性能预算。单元测试使用一个 worker，避免完整地图和物理测试在 hosted runner 上争抢 CPU；保留全部断言和源仓库的测试时限。成功后，16 个独立 Chromium job 克隆同一个已校验 SHA，安装浏览器依赖，先用 `pnpm test:e2e --fully-parallel --shard=N/16 --list` 枚举完整测试集合，再由 `scripts/run-private-e2e.mjs` 使用 Playwright 的精确 test-list 逐项执行。每项使用新的 Chromium 进程，释放上一项的 GPU 与音频状态；同一用例内的多窗口和多人交互仍在同一浏览器完成。每次核对报告确实包含唯一指定用例，缺失、重复、加载错误或测试失败都会使分片失败。按独立测试分配分片，每个 runner 只用一个 worker，保留源仓库的重试、等待时限、全部测试与预算断言。使用 Playwright 锁定版本的完整 Chromium，在 Xvfb 虚拟显示中通过 Mesa OpenGL 运行；默认无头软件图形路径会拖慢真实交互，导致同一用例在 Linux runner 上超时。源仓库通过 `PLAYWRIGHT_USE_MESA=1` 选择这个 CI 渲染配置，本机仍使用默认浏览器配置。全部分片通过才算整体成功；失败不被忽略，也不缩减既有测试范围。文档检查可选，桌面发行使用独立流程。
+流水线按源仓库 `package.json` 的 `packageManager` 安装 pnpm，并使用 frozen lockfile。COS 运行素材由旧仓库既有 `assets:pull --runtime-only` 按 SHA-256 恢复，不需要提供 COS 写入凭证。Web job 执行类型检查、单元测试、Web 构建、发布检查与性能预算。单元测试使用一个 worker，避免完整地图和物理测试在 hosted runner 上争抢 CPU；保留全部断言和源仓库的测试时限。成功后，16 个独立 Chromium job 克隆同一个已校验 SHA，安装浏览器依赖，先用 `pnpm test:e2e --fully-parallel --shard=N/16 --list` 枚举完整测试集合，再由 `scripts/run-private-e2e.mjs` 使用 Playwright 的精确 test-list 逐项执行。每项使用新的 Chromium 进程，释放上一项的 GPU 与音频状态；同一用例内的多窗口和多人交互仍在同一浏览器完成。Vite 服务在分片内复用，避免反复冷启动。每次核对报告确实包含唯一指定用例，缺失、重复、加载错误、跳过或测试失败都会使分片失败。按独立测试分配分片，每个 runner 只用一个 worker，保留源仓库的重试、等待时限、全部测试与预算断言。使用 Playwright 锁定版本的完整 Chromium，在 Xvfb 虚拟显示中通过 Mesa OpenGL 运行；默认无头软件图形路径会拖慢真实交互，导致同一用例在 Linux runner 上超时。源仓库通过 `PLAYWRIGHT_USE_MESA=1` 选择这个 CI 渲染配置，本机仍使用默认浏览器配置。全部分片通过才算整体成功；失败不被忽略，也不缩减既有测试范围。文档检查可选，桌面发行使用独立流程。
 
 初版没有 artifact 或 cache 上传，构建文件在一次性的 GitHub-hosted runner 中使用，任务结束后不提供下载。需要下载、部署或发布时，先确定私有存储目标及素材许可，再增加相应步骤。
 
 ## 公开构建与额度
 
 `gza` 作为同一 GZA 项目的公开构建仓库，当前使用标准 `ubuntu-latest` runner。公开仓库的标准 runner 按当前计费文档免费使用 GitHub Actions 构建分钟；larger runner 另行收费。本流程不上传 artifact 或 cache。[GitHub Actions 计费](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
+
+执行器按枚举结果启动真实本地测试服务：短程配送使用源仓库已有的权威地图夹具；生产城市合作使用实际构建的静态预览；云端双人合作读取固定版本 `YunLeFun/play`，运行其 Colyseus 测试服务与临时测试用户。后者单独使用 `PLAY_SOURCE_TOKEN`，仅授予 `play` 的 Contents 和必需 Metadata 只读权限，保存在 Actions Secrets。测试不使用生产账号，也不上传私有源码、缓存或构建产物。
 
 维护者已接受公开工作流日志可能包含私有源仓库的文件名、源码片段、配置或错误内容。访问 token 和其他凭证仍保密，禁止将它们输出到日志。Secret 掩码不会自动隐藏全部私有代码和诊断信息。[GitHub Actions 安全指南](https://docs.github.com/en/actions/reference/security/secure-use)
 

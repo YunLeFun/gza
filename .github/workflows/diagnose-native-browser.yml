@@ -21,6 +21,15 @@ jobs:
         shell: bash
         working-directory: source
     steps:
+      - name: Checkout public diagnostic runner
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: YunLeFun/gza
+          ref: ${{ github.sha }}
+          path: public-ci
+          persist-credentials: false
+          sparse-checkout: scripts/run-private-e2e.mjs
+          sparse-checkout-cone-mode: false
       - name: Validate trusted revision
         working-directory: ${{ github.workspace }}
         env:
@@ -47,4 +56,4 @@ jobs:
         env:
           PLAYWRIGHT_USE_MESA: '1'
           PLAYWRIGHT_USE_VULKAN: '1'
-        run: xvfb-run --auto-servernum pnpm exec playwright test e2e/curves.spec.ts e2e/district.spec.ts e2e/water-rendering.spec.ts e2e/render-backends.spec.ts --grep 'plays a curved road|keeps the mobile map|keeps street lighting|keeps Tencent entrance|captures real reflected|WebGPU' --retries=0
+        run: xvfb-run --auto-servernum node ../public-ci/scripts/run-private-e2e.mjs 1/1 '--grep=plays a curved road|keeps the mobile map|keeps street lighting|keeps Tencent entrance|captures real reflected|WebGPU'
