@@ -19,6 +19,13 @@ on:
         options:
           - '[1,2,3,4,5]'
           - '[1]'
+      driver:
+        description: Browser graphics profile for this diagnosis
+        default: mesa-dawn
+        type: choice
+        options:
+          - mesa-dawn
+          - headless
 permissions:
   contents: read
 jobs:
@@ -69,7 +76,7 @@ jobs:
           pnpm exec playwright install --with-deps chromium
       - name: Verify Vulkan rendering and interaction regressions
         env:
-          PLAYWRIGHT_USE_MESA: '1'
+          PLAYWRIGHT_USE_MESA: ${{ inputs.driver == 'headless' && '0' || '1' }}
           PLAYWRIGHT_USE_VULKAN: '1'
           E2E_GREP: ${{ inputs.test_grep }}
           DEBUG: pw:browser
