@@ -160,13 +160,16 @@ jobs:
           pnpm build
           pnpm exec playwright install --with-deps chromium
       - name: Run every production performance case with its original budgets
-        run: node ../public-ci/scripts/run-private-e2e.mjs 1/1 --performance
+        env:
+          PLAYWRIGHT_USE_MESA: '1'
+          PLAYWRIGHT_USE_VULKAN: '0'
+        run: xvfb-run --auto-servernum node ../public-ci/scripts/run-private-e2e.mjs 1/1 --performance
 
   browser:
     name: Browser E2E (${{ matrix.shard }}/16)
     needs: web
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
