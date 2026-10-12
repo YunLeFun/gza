@@ -27,6 +27,10 @@ on:
           - mesa-dawn
           - mesa-webgl
           - headless
+      performance:
+        description: Run the original production cold-start performance suite
+        default: false
+        type: boolean
 permissions:
   contents: read
 jobs:
@@ -75,6 +79,9 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm assets:pull --runtime-only
           pnpm exec playwright install --with-deps chromium
+      - name: Build the production performance fixture
+        if: ${{ inputs.performance }}
+        run: pnpm build
       - name: Verify Vulkan rendering and interaction regressions
         env:
           PLAYWRIGHT_USE_MESA: ${{ inputs.driver == 'headless' && '0' || '1' }}
@@ -83,4 +90,8 @@ jobs:
           DEBUG: pw:browser
           E2E_SHARD: ${{ matrix.shard }}
           E2E_TOTAL: ${{ strategy.job-total }}
-        run: xvfb-run --auto-servernum node ../public-ci/scripts/run-private-e2e.mjs "${E2E_SHARD}/${E2E_TOTAL}" "--grep=${E2E_GREP}"
+          E2E_PERFORMANCE: ${{ inputs.performance }}
+        run: |
+          args=("${E2E_SHARD}/${E2E_TOTAL}" "--grep=${E2E_GREP}")
+          if [[ "$E2E_PERFORMANCE" == 'true' ]]; then args+=(--performance); fi
+          xvfb-run --auto-servernum node ../public-ci/scripts/run-private-e2e.mjs "${args[@]}"
