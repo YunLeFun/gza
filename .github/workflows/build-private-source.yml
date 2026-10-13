@@ -238,6 +238,9 @@ jobs:
           corepack install
           pnpm install --frozen-lockfile --filter @yunlefun/play-game-server...
           pnpm --filter @yunlefun/play-game-server^... build
+          if [ -f ../source/scripts/prepare-play-test-authority.mjs ]; then
+            node ../source/scripts/prepare-play-test-authority.mjs --authority=.
+          fi
 
       - name: Install Chromium and browser dependencies
         run: pnpm exec playwright install --with-deps chromium
