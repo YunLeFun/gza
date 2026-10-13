@@ -49,6 +49,18 @@ See [desktop and city-map implementation plan](desktop-steam.md) for current beh
 - [x] Deploy Play cooperation rooms and CloudBase ticket issuance; validate two dedicated production test clients creating/joining, starting, shooting, reloading and releasing the room. See [the 2026-10-09 release evidence](releases/2026-10-09-coop.md).
 - [ ] Validate the deployed webpage with real player sessions, measure production RTT / bandwidth / load, and complete formal Steam App ID, cross-network and physical-device acceptance. Backend smoke and local GPU tests do not complete these checks; see [the implementation plan](two-seat-zombie-coop-plan.md).
 
+## 僵尸生存与局内成长（后续设计） {#zombie-survival}
+
+[吸血鬼猎人式僵尸生存设计](zombie-survival.md)已于 2026-10-13 整理；以下均待实现。作为城市僵尸突围的生存规则变体，先验证单人，再扩展合作与 AI 战斗模板，不承诺发布日期。
+
+- [ ] S0：确定一个街区、十分钟、三种基础武器和六种升级的原型规则，明确经验、三选一、组合上限和骑行／步行／后座职责。
+- [ ] S1：验收单人生存循环：骑行找物资 → 停车清路 → 补给升级 → 救人 → 集合撤离；验证五次选择机会、至少两种有效组合、失败重试与退出恢复街区。
+- [ ] S2：扩展共享经验、个人升级选择和全队补给阶段，验收双座分工、倒地救援、选择超时／成员退出、键鼠／触屏／手柄与真实联机。
+- [ ] S3：按预算逐项扩展敌人组合、自动辅助装备和任务变体，保留遮挡、冷却、姿态限制，完成手机可读性、整帧性能与发布验收。
+- [ ] S4：在原生玩法验证后开放受控波次、升级池、路线和撤离条件，接入 AI 玩法包 P3 的战斗模板；不扩大第一版 AI 内容范围。
+
+局内升级在结束或重开时清除，不写官方经济或探索背包。司机负责转移和停车，后座负责枪械掩护，步行负责清路、搜刮与救援；新增规则不代表既有合作房或生产服务已升级。
+
 ## Prototype
 
 - [x] First-person scooter camera
