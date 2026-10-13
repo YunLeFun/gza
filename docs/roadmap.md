@@ -20,6 +20,8 @@ The first release is **GZA：暴力电驴**. **GZA** stands for **GuangZhou Acti
 - [ ] P3：增加固定版本分享与合作试玩，匹配玩法包 / 地图 / 宿主规则 hash 和种子，验收更新失败回退与权威端一致性；再开放受控救援 / 战斗模板。
 - [ ] P4：探索实时 AI 导演与 NPC，限制为离散事件后的动作提案，验收费用控制、超时 / 断线兜底、过期回复拒绝及读档不重复执行。
 
+执行细分见 [AI 可执行待办计划](ai-gameplay.md#implementation-backlog)：A0 冻结当前门禁，A1–A2 先交付无界面的能力快照与纯校验器，A3–A5 才接离线宿主，A6–A8 完成 MCP / Skill 闭环。每项必须有测试与证据才能勾选；文档细化不等于功能实现。
+
 玩法包依赖固定地图，与[城市地图包和 Workshop](desktop-steam.md#创意工坊-城市地图包)分开管理。生成内容复用同一宿主契约；MCP 提供创作工具，Skills 提供创作流程，实时模型不是离线游玩的必要依赖。
 
 ## Desktop and Steam
