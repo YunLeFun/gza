@@ -55,9 +55,15 @@ pnpm benchmark:camera --platform=browser --backend=webgpu --scenario=city --dura
 
 `--rounds=3` 会复用同一进程／房间。冷启动和联机新房间需要三次独立命令，每次 `--rounds=1`；新进程也不保证操作系统或 GPU 驱动缓存完全冷。10 秒联机样本只用于早期卡顿，持续联机还需另建正常游玩路径，保证采样全程仍为 `running`。
 
+Windows 跨街区骑行可使用 `--motion=route --route=canton-tower,tit-north,kecun,liyuan --duration=360000 --rounds=1 --frame-rate=90 --min-fps=60`，与 `--platform=desktop --backend=webgl` 组合。路线通过普通骑行输入、真实碰撞查询及必要倒车完成，保留警察拦停；起点只在计时前设置，路线完成后提前结束采样。正式前后对照仍需至少三组独立进程、交替顺序，基线不传 `--min-fps` 以保留失败数据，但必须检查路线确实完成。
+
+`--min-fps` 同时要求实际骑行和路线进度至少一公里、横向或纵向跨度至少 500 米、计划路线完成、游戏仍在游玩、实际后端一致及缓冲未改变；最低值来自实际采样中的完整一秒窗口，包含空窗口，末尾不足一秒不参与统计。失败 JSON 也会保存，不能用原地等待的高帧率替代长途验收。90 FPS 是本机在 60 FPS 上限边界留出余量的已有设置，增加绘制频率，不能推导其他设备均能达到同样帧率；保留默认上限并另列实际质量与功耗等代价。
+
 `--baseline=/absolute/frozen/apps/dayun-kicker` 可替换工具加载的应用 `src/`。当前脚本仍使用当前工作区的依赖、共享包、开发服务器和资源；涉及这些内容的改动应分别运行完整冻结的基线／优化工作区，不能只用此选项声称完整版本对比。基线也须使用相同计量版本和轨迹。
 
 `--profile=true`、`--trace=true`、`--pacing=true` 仅用于诊断，输出单列。正式采样关闭它们及完整 GPU 分析，轻量面板也保持关闭，由基准工具采集。面板开／关的额外成本需另做专门对比。
+
+`--heap-diagnostic=true` 在采样结束后执行一次强制回收，另列回收前后 JS 堆读数并标记诊断用途。它不证明长期稳定，也不能与未强制回收的正式样本混算内存收益；正式性能采样关闭此项。
 
 ### 样本与报告规则
 
@@ -75,6 +81,8 @@ pnpm benchmark:camera --platform=browser --backend=webgpu --scenario=city --dura
 轻量面板由真实游戏渲染循环记录，避免独立 rAF 把回调次数当成游戏帧数。当前 FPS 使用最近最多 120 个间隔，P95／P99／长帧使用最近最多 4,096 个间隔；加载预热不混入游玩窗口。面板约 500 ms 刷新，关闭后停止采样。字段、UI 及开发诊断边界见 [UI 组件约定](ui-components.md)。
 
 `formatVersion: 2` 的渲染提交 CPU 是一次世界渲染函数的墙钟时间，包含嵌套阴影／水面，排除游戏逻辑和最终呈现。它不等于整帧 CPU 使用率或 GPU 耗时；不能逐层累加嵌套 `renderer.render()`，也不能将 CPU 与 GPU 时间直接相加成帧间隔。计量边界改变后，旧数字要标记不可直接比较。
+
+骑行工具另列 `cpuTotal`：街区渲染回调从入口到最终呈现结束的墙钟时间，包含逻辑、自动骑行控制和渲染，排除未开启的可选后视镜步骤。它与原有 `cpu` 分开统计，仍不是进程 CPU 使用率或 GPU 时间；沿用同一计量版本和输入轨迹才能作前后对照。
 
 用 [Chrome Performance](https://developer.chrome.com/docs/devtools/performance/reference) 的帧、主线程、合成及调用栈调查长帧。正式游戏帧耗时验收以目标 GPU／设备的实际游玩为主；LCP／INP 等网页指标与节流启动测试保留各自用途，不替代相机移动验收。
 
