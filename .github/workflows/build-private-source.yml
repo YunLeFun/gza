@@ -84,6 +84,15 @@ jobs:
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
 
+      # Cache only public, content-addressed media; never the private checkout.
+      - name: Cache pinned runtime media
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: source/.cache/dayun-media
+          key: dayun-runtime-media-${{ runner.os }}-v1-${{ hashFiles('source/assets/media-manifest.json') }}
+          restore-keys: |
+            dayun-runtime-media-${{ runner.os }}-v1-
+
       - name: Restore and verify pinned media
         run: pnpm assets:pull --runtime-only
 
@@ -111,6 +120,15 @@ jobs:
           ref: ${{ github.sha }}
           path: public-docs
           persist-credentials: false
+
+      - name: Cache pinned documentation media
+        if: ${{ inputs.build_docs }}
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: public-docs/.cache/dayun-media
+          key: docs-media-${{ runner.os }}-v1-${{ hashFiles('public-docs/assets/media-manifest.json') }}
+          restore-keys: |
+            docs-media-${{ runner.os }}-v1-
 
       - name: Typecheck and build public documentation
         if: ${{ inputs.build_docs }}
@@ -152,6 +170,13 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+      - name: Restore cached runtime media
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: source/.cache/dayun-media
+          key: dayun-runtime-media-${{ runner.os }}-v1-${{ hashFiles('source/assets/media-manifest.json') }}
+          restore-keys: |
+            dayun-runtime-media-${{ runner.os }}-v1-
       - name: Prepare the locked production build and browser
         run: |
           corepack enable
@@ -212,6 +237,14 @@ jobs:
 
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Restore cached runtime media
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: source/.cache/dayun-media
+          key: dayun-runtime-media-${{ runner.os }}-v1-${{ hashFiles('source/assets/media-manifest.json') }}
+          restore-keys: |
+            dayun-runtime-media-${{ runner.os }}-v1-
 
       - name: Restore and verify pinned media
         run: pnpm assets:pull --runtime-only

@@ -48,6 +48,13 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+      - name: Cache pinned runtime media
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: source/.cache/dayun-media
+          key: dayun-runtime-media-${{ runner.os }}-v1-${{ hashFiles('source/assets/media-manifest.json') }}
+          restore-keys: |
+            dayun-runtime-media-${{ runner.os }}-v1-
       - name: Prepare locked dependencies and browser
         run: |
           corepack enable

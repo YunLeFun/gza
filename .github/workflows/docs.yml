@@ -29,5 +29,12 @@ jobs:
         run: node --test ci/tests/github-webhook.test.mjs
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
+      - name: Cache pinned documentation media
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: .cache/dayun-media
+          key: docs-media-${{ runner.os }}-v1-${{ hashFiles('assets/media-manifest.json') }}
+          restore-keys: |
+            docs-media-${{ runner.os }}-v1-
       - name: Check documentation types and build
         run: pnpm docs:typecheck && pnpm docs:build
