@@ -49,6 +49,7 @@
 | `--ui-control-small` / `--ui-control-height` / `--ui-control-large` | 34、40、52 px 最小控件高度；触屏或不超过 700 px 的窄屏，常规与小号为 44 px |
 | `--ui-titlebar-height` | Electron 窗口模式的 40 px 标题栏；原生窗口按钮高度需在桌面主进程同步 |
 | `--ui-motion` / `--ui-focus` / `--ui-focus-width` | 120 ms 状态反馈、键盘焦点；减少动态效果偏好下为 0 ms |
+| `--ui-press-brightness` | 按下时的短促明暗反馈，配合共享动效时长使用 |
 | `--ui-layer-*` / `--ui-shadow-*` | HUD、菜单、弹窗、购买确认（checkout）、渲染恢复（recovery）、全屏车库（fullscreen）、选择浮层、诊断层及阴影 |
 
 新增视觉值优先使用这些 token。场景布局的宽度、位置和响应式断点由业务组件决定。旧的 `--arcade-*`、`--launch-*`、`--menu-*` 等变量保留为共享 token 的别名，供尚未迁移的功能面板使用；不再新增独立色板。
@@ -99,6 +100,10 @@ defineEmits<{ resume: [] }>();
 `GameButton` / `GameLink`、`GamePanel`、`GameMetric` 的展示样式分别维护在 `ui/styles/button.css`、`panel.css`、`metric.css`。按钮与链接直接导入同一份仅作用于 `.game-button` 的样式，构建时去重；面板与读数使用 scoped 外部样式。街区 loading 页需要在 Vue、Three 和地图模块到达前显示，因此保留 `district.html` 的原生 HTML，并在 `district/loading.css` 直接导入同一份样式和 token。原生节点复用对应的 `game-*` class、`data-ui-*` 属性和读数结构；返回首页保留原生链接，使用按钮样式的悬停与焦点反馈。加载状态、进度和错误恢复仍由 `district/loading.ts` 管理，不引入 Vue 运行时。正常进度使用 info，错误使用 danger；保留原有 DOM ID、单一状态播报、输入隔离和焦点恢复。
 
 `GameLink` 保留原生 `<a>` 的链接语义、跳转、键盘与修饰键行为，并复用 `GameButton` 的 `ui/styles/button.css`；游戏菜单内的导航操作不使用下划线，通过方角底板、边线、悬停和键盘焦点表示可交互。链接不提供按钮的 `type` / `disabled` 属性，ID、ARIA、业务属性与原生事件直接透传。
+
+宿主统一安装 `ui/interactionFeedback.ts`，覆盖首页、比赛、街区及合作菜单，包括 Portal 内的按钮、Select 和 Switch。点击反馈样式在首次操作时加载，通过短时 `data-ui-feedback="pressed"` 使用共享动效、边线和明暗 token，不改变选中配色、布局或焦点；减少动态效果时取消动画。基础组件不引入音频依赖。音效通过 `GameAudio.play` 提交带类型的声音事件，复用主音量、静音与音效通道；菜单导航、确认、开关、打开和关闭使用不同短音，暂停期间保留菜单反馈。首个用户操作解锁音频，音频不可用时仍能正常操作。宿主通过 `subscribeSettings` 同步其他作用域改变的音量与静音。禁用、隐藏、输入框编辑和修饰键导航不播放反馈，键盘重复与同一次操作产生的事件去重。分类、优先级、声部预算与生命周期见 [统一音效系统](audio-system.md)。
+
+原生按住控件或 `data-ui-held` 节点保持指针捕获和释放流程，只在按下时显示反馈；骑行音效由合并输入的按下边沿产生，长按、持续转向和暂停恢复不重复响铃。已有踢击、开火等玩法音效的区域可传 `data-ui-sound="none"` 取消通用确认音，内部菜单入口用 `data-ui-sound="auto"` 恢复；游戏动作音效仍由宿主在有效操作后播放。宿主卸载时清理监听器及反馈计时器。
 
 状态通知默认使用 `role="status"`；已有内部 live region 时传 `role="none"`，避免重复播报。需要直接获取原生 DOM ref 的 Reka 关闭按钮仍保留原生节点，使用同一组 token。
 

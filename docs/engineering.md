@@ -42,6 +42,7 @@ docs
 - [AI 自定义玩法：玩法包、MCP 与 Skills 设计草案](ai-gameplay.md)
 - [僵尸生存：局内成长、武器组合与骑行分工设计草案](zombie-survival.md)
 - [UI 组件复用约定](ui-components.md)
+- [统一音效系统、混音与播放策略](audio-system.md)
 - [按需加载与离线资源](lazy-loading.md)
 - [Steam App ID 与抢先体验发布](steam-release.md)
 - [地图与影像资料索引](map-data-sources.md)
