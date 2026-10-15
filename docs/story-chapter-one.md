@@ -44,3 +44,7 @@
 ## 上架候选验收
 
 具体候选包、验证结果和剩余事项记录于 [首章发布候选](https://github.com/YunLeFun/dayun-kicker/blob/main/steam/chapter-one-candidate.md)。不把自动化到点交付称为完整人工骑行，不把跨平台打包成功称为 Windows 实机验收。游玩时长与最低配置在实际玩家测试后填写。
+
+## 后续剧情灵感
+
+[大云身世与剧情灵感草案](story-dayun-ideas.md)记录后续候选方向，含剧透；尚未写入游戏，不改变本章任务、完成条件或验收结果。
