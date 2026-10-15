@@ -16,6 +16,8 @@ import ItemCatalog from './.vitepress/theme/components/ItemCatalog.vue'
 
 <ItemCatalog />
 
+武器集中选择与旋转预览请看[武器模型预览](./weapon-models)。
+
 ## 范围与模型说明
 
 - 覆盖合作武器、城市近战工具、街区背包物品、道具赛拾取物、合作路线资源和配送货物类别
