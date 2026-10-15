@@ -37,3 +37,5 @@ import ModelSampleGallery from './.vitepress/theme/components/ModelSampleGallery
 ## 验证命令
 
 运行 pnpm docs:models-check 检查目录结构和失败路径；附加包含各素材包目录的本地根路径，可验证全部真实 GLB、文件大小与 SHA-256。另运行 pnpm docs:typecheck、pnpm docs:build、pnpm assets:git-check 和 git diff --check。
+
+资源根只接受 HTTPS 或 localhost/回环 HTTP，不允许内嵌凭据、查询参数与 fragment。加载前校验大小和 SHA-256，并拒绝外部 buffer、图片、纹理、蒙皮和多场景，以保持当前原创无纹理样品的隔离边界；请求不携带登录凭据、不跟随重定向，超出清单大小立即取消读取。

@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent, shallowRef } from 'vue';
+import { computed, defineAsyncComponent, defineComponent, h, shallowRef } from 'vue';
 import GameButton from '../../game-reference/apps/dayun-kicker/src/ui/components/base/GameButton.vue';
 import { MODEL_CATALOG, modelCatalogBase, modelUrl } from './models/modelCatalog';
-const Viewer = defineAsyncComponent(() => import('./models/ModelSampleViewer.vue'));
+const Viewer = defineAsyncComponent({
+  loader: () => import('./models/ModelSampleViewer.vue'),
+  timeout: 15000,
+  errorComponent: defineComponent({ setup: () => () => h('p', { role: 'alert' }, '3D 模块加载失败，模型资料仍可阅读 · Preview unavailable; model details remain available.') }),
+});
 const english = shallowRef(false), category = shallowRef('all'), selectedId = shallowRef(MODEL_CATALOG[0]!.id);
 const categories = [['all', '全部', 'All'], ['characters', '角色', 'Characters'], ['vehicles', '载具', 'Vehicles'], ['weapons', '武器', 'Weapons'], ['props', '道具', 'Props']];
 const filtered = computed(() => MODEL_CATALOG.filter(item => category.value === 'all' || item.category === category.value));

@@ -26,3 +26,5 @@ GZA_WEAPON_MODEL_BASE=http://localhost:8081 pnpm docs:dev
 加载器回归测试：`pnpm docs:weapons-check` 在不需要 GLB 的情况下验证全部武器的离线、404 与无效文件回退；`pnpm docs:weapons-check /absolute/path/to/weapon-models` 另外验证全部真实 GLB 和握持节点。这是本地测试，不会下载或上传模型。
 
 本地公开目录会进入 VitePress 构建产物。构建入口会拒绝 `docs/public/models/` 内的文件，防止误带未发布媒体；仅清空资源根配置并不会删除产物里的文件。正式 COS 接入后再按已验证的资源清单调整此限制。
+
+资源根只接受 HTTPS 或 localhost/回环地址上的 HTTP，不允许凭据、查询参数或 fragment。外部武器与统一目录一样按固定字节数与 SHA-256 校验，超过清单大小会立即取消流；GLB 在解析前必须符合单场景、无蒙皮、无纹理与外部 URI 的样品边界。请求不携带登录凭据、不跟随重定向。

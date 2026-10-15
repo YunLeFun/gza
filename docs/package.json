@@ -6,7 +6,7 @@
   "packageManager": "pnpm@11.10.0",
   "scripts": {
     "dev": "node ../scripts/media-assets.mjs && vitepress dev --host 127.0.0.1",
-    "build": "node ../scripts/check-docs-model-media.mjs && node ../scripts/media-assets.mjs && node ../scripts/check-docs-inputs.mjs && vitepress build",
+    "build": "node ../scripts/check-docs-model-media.mjs && node ../scripts/check-model-catalog.mjs && node ../scripts/check-weapon-preview.mjs && node ../scripts/media-assets.mjs && node ../scripts/check-docs-inputs.mjs && vitepress build",
     "preview": "vitepress preview --host 127.0.0.1",
     "typecheck": "node ../scripts/media-assets.mjs && vue-tsc --noEmit"
   },
