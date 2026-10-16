@@ -28,7 +28,8 @@
 | --- | --- | --- |
 | 首页 / 街区入口 JS gzip | 350 KiB | 512 KiB |
 | 街区加载器 JS gzip | 8 KiB | 8 KiB |
-| 各入口 CSS gzip | 16 KiB | 16 KiB |
+| 首页 CSS gzip | 17 KiB | 17 KiB |
+| 其他入口 CSS gzip | 16 KiB | 16 KiB |
 | CloudBase 分包 gzip | 210 KiB | 210 KiB |
 | Rapier 分包 gzip | 1.25 MiB | 1.25 MiB |
 | 音频 raw | 5.3 MiB | 64 MiB |
@@ -36,6 +37,8 @@
 | 每架构解包应用 raw，含 Electron 与原生库 | — | 768 MiB |
 
 `pnpm verify:performance` 默认使用网页预算；`pnpm verify:performance:desktop` 检查客户端内置游戏资源。`pnpm build` 生成 Web `dist`，`pnpm verify:performance` 检查其预算；`pnpm desktop:build` 生成独立 `dist-desktop` 并自动运行客户端预算与发布完整性校验；打包后 `pnpm verify:desktop` 再检查实际离线资源、音频与完整应用体积。macOS framework 符号链接只计一次目标文件，不把多个架构的包累加。网页总量包含全部 Web 发布资源，客户端资源总量不含 Electron；完整应用预算包含 Electron。手机限速启动门禁按阶段区分：首页按钮就绪 15 秒、比赛真实首帧 35 秒、完整街区真实首帧 60 秒；条件、依据与实际体验目标见[发布验收清单](release-checklist.md)。
+
+2026-10-17 按用户授权，仅将首页 CSS gzip 预算由 16 KiB 调整为 17 KiB（`homeStylesheetGzip`），街区、合作、城市合作与下载入口仍为 16 KiB。原因是共享的 GTA 风格 UI 动效：`tokens.css` 的动效 token 与关键帧、`GamePanel` / `GameNotice` 擦入、`GameButton` 悬停边条及首页字标揭示同时进入首页静态 CSS。调整前基线为 15.9 KiB，余量约 80 字节；已删去首页专属的入口级联与赛事弹窗动画后，首页 CSS 为 16,591 / 16,384 字节，仍超出 207 字节。新预算余量约 0.8 KiB，后续首屏样式仍需先运行 `pnpm verify:performance`。合作战斗入口 JS 在本轮之前已为 350.1 / 350 KiB，本轮为 350.5 KiB，该项未调整，仍为失败项。
 
 2026-10-08 预算调整验证：重新构建后的两套体积检查与 185 文件发布完整性检查通过；首页 / 街区入口分别为 293.3 / 304.2 KiB gzip，完整游戏资源为 11.84 MiB。14 项预算与 Steam 打包相关单测通过，覆盖错误 profile、完整启动依赖计数、符号链接去重，以及资源、音频、完整应用超限拒绝。重新打包的 macOS ARM64 应用为 310.33 / 768 MiB，离线资源与原生库校验通过。Windows / Linux 当前旧产物需重新构建，交由对应打包 CI 验收；本轮未重新测量弱网首次可玩时间。
 

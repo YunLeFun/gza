@@ -49,8 +49,20 @@
 | `--ui-control-small` / `--ui-control-height` / `--ui-control-large` | 34、40、52 px 最小控件高度；触屏或不超过 700 px 的窄屏，常规与小号为 44 px |
 | `--ui-titlebar-height` | Electron 窗口模式的 40 px 标题栏；原生窗口按钮高度需在桌面主进程同步 |
 | `--ui-motion` / `--ui-focus` / `--ui-focus-width` | 120 ms 状态反馈、键盘焦点；减少动态效果偏好下为 0 ms |
+| `--ui-motion-panel` / `--ui-ease-out` | 220 ms 面板擦入与选中条滑动；标题横幅揭示使用两倍时长。减少动态效果偏好下为 0 ms |
 | `--ui-press-brightness` | 按下时的短促明暗反馈，配合共享动效时长使用 |
 | `--ui-layer-*` / `--ui-shadow-*` | HUD、菜单、弹窗、购买确认（checkout）、渲染恢复（recovery）、全屏车库（fullscreen）、选择浮层、诊断层及阴影 |
+
+### GTA 风格动效
+
+`tokens.css` 提供共享关键帧：`ui-wipe-in`（自左向右的 clip-path 擦入）、`ui-fade-in` 与 `ui-title-reveal`（自中线展开的横幅标题）。关键帧只改变透明度与 clip-path，不改变 `transform` 或布局尺寸，已用 `transform` 定位的面板与 E2E 的几何检查不受影响；均使用 `backwards` 填充，结束后不残留裁切。
+
+- `GamePanel` 与 `GameNotice` 挂载或 `v-show` 重新显示时擦入；父级过渡已负责入场时传 `data-ui-motion="none"`。
+- `GameButton` / `GameLink` 悬停或键盘聚焦时，左侧以 `--ui-focus-width` 白色边条生长；主按钮与选中态保持既有白底配对。
+- Reka 弹窗只在 `data-state="open"` 时淡入与擦入，关闭保持即时，避免延迟焦点恢复；`GameSelect` 下拉自上展开，设置分类的 `TabsIndicator` 在分类之间滑动。
+- 街区暂停菜单、剧情时刻标题与首页字标使用横幅揭示。
+
+首页 CSS 预算为 17 KiB（见[按需加载](lazy-loading.md)），首页专属的入口级联动画暂未启用；新增首屏动效前先运行 `pnpm verify:performance`。
 
 新增视觉值优先使用这些 token。场景布局的宽度、位置和响应式断点由业务组件决定。旧的 `--arcade-*`、`--launch-*`、`--menu-*` 等变量保留为共享 token 的别名，供尚未迁移的功能面板使用；不再新增独立色板。
 
