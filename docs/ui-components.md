@@ -64,6 +64,22 @@
 
 首页 CSS 预算为 17 KiB（见[按需加载](lazy-loading.md)），首页专属的入口级联动画暂未启用；新增首屏动效前先运行 `pnpm verify:performance`。
 
+### GTA 风格组件（2026-10-17）
+
+位于 `components/base/`，只负责展示；时机、队列、关闭与定位由业务组件决定。开发服务器的 `/ui-gallery.html` 汇总全部组件与 HUD 合成示例，生产发布不包含该页面，只有 `VITE_UI_GALLERY=1` 的预览构建会加入。
+
+| 组件 | 用途与约定 |
+| --- | --- |
+| `GameButton layout="row"` | GTA 暂停菜单行：通栏、左对齐，悬停 / 聚焦 / `aria-pressed` 时整行白底；`#value` 插槽显示右侧值。保留原生按钮、ID 与事件 |
+| `GameKey` | 键帽：`kind="key"` 方形键盘键，`kind="pad"` 圆形手柄键 |
+| `GameInstructionBar` | 右下角操作提示，`items` 为 `{ key, label, kind? }`；触屏界面由业务决定是否显示 |
+| `GameBanner` | 任务横幅：`tone="success"` 金色（`--ui-reward`）、`danger` 红色（`--ui-danger-strong`）、`info` 白色；`backdrop="desaturate"` 为画面去色。父级有 `transform` 时固定定位会被限制，应改为在遮罩上去色（城市合作结算即如此）。标题与对话框标题重复时传 `role="none"` 并对屏幕阅读器隐藏 |
+| `GameFeed` | 通知卡片：语义色左边条、`#icon` 插槽，`duration` 毫秒绘制倒计时条；队列与移除由调用方负责 |
+| `GameMeter` | HUD 细条：`role="meter"`，值夹在 0–1，下降时留白色拖尾；`segments` 分格表示护甲 |
+| `GameSpinner` | 保存 / 加载环与文字，`role="status"` |
+
+新增 token：`--ui-reward`、`--ui-danger-strong` 只用于任务横幅语义，`--ui-shadow-title` 为大标题描边阴影。当前接入：街区暂停菜单（菜单行 + 操作提示）、首章通关横幅、城市合作结算横幅与失败去色。
+
 新增视觉值优先使用这些 token。场景布局的宽度、位置和响应式断点由业务组件决定。旧的 `--arcade-*`、`--launch-*`、`--menu-*` 等变量保留为共享 token 的别名，供尚未迁移的功能面板使用；不再新增独立色板。
 
 Electron 在恢复本机设置后按需加载 `DesktopTitlebar` 与桌面外壳。标题栏复用 `--ui-surface` / `--ui-text` / `--ui-line`，保留原生窗口按钮、拖动区域和 macOS 系统菜单；原生 overlay 的颜色及高度与这些 token 保持同步。全屏隐藏标题栏并恢复完整游戏区域。桌面外壳为固定 HUD 建立包含块；Dialog、Select 和车库通过 `getUiPortalTarget()` 挂载到游戏区域，浏览器仍挂载到 body。新增 Portal / Teleport 应复用该目标，弹窗高度使用 `--app-height`，避免遮挡标题栏或超出游戏区域。
