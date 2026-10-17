@@ -7,6 +7,8 @@ description: GZA 的公开文档、贡献与工程维护入口。
 公开文档统一在 [YunLeFun/gza](https://github.com/YunLeFun/gza) 维护，文档站可以独立构建。游戏源码暂时保存在私有 `dayun-kicker`，由 gza 的受控工作流读取指定提交进行验证。
 
 - [工程文档索引](engineering.md)
+- [游戏开发待办：当前优先级、依赖与验收](development-backlog.md)
+- [Steam Demo v0.1：剧情与范围](steam-demo-v0.1.md)
 - [路线图](roadmap.md)
 - [报告问题](https://github.com/YunLeFun/gza/issues)
 - [文档维护与部署](README.md)

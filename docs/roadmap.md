@@ -1,5 +1,9 @@
 # Roadmap
 
+## 当前执行待办（2026-10-17）
+
+当前 Godot 单人 Demo 的具体任务、依赖与验收状态统一见 [游戏开发待办](development-backlog.md)：B0 基线与范围 → V1 垂直切片 → D2 五幕 Demo → R3 发布验收。产品和剧情依据见 [Steam Demo v0.1 计划](steam-demo-v0.1.md)。本页保留长期方向、各宿主历史能力与原迁移阶段，不据此把旧 Web 完成项视为新 Demo 已完成。
+
 ## Godot 迁移主线（2026-10-16）
 
 原生引擎确定为 Godot，当前执行顺序以 [完整迁移计划](godot-migration.md) 为准。下方已完成项继续表示原有 Web / Electron 或服务端的实现，不等同于原生版验收通过。

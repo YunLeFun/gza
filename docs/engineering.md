@@ -32,6 +32,8 @@ docs
 - [玩家手册](index.md)
 - [VitePress 文档 workspace 与部署](README.md)
 - [GZA：暴力电驴 · 方向与分阶段计划](gza-direction.md)
+- [游戏开发待办：基线、垂直切片、完整 Demo 与发布验收](development-backlog.md)
+- [Steam Demo v0.1：五幕剧情与开发计划](steam-demo-v0.1.md)
 - [Godot 完整迁移计划：第一章、完整街区、地图分块与扩城](godot-migration.md)
 - [Godot 迁移实施进度与 M0–M1 历史记录](godot-migration-progress.md)
 - [共享 JSON 剧情节点图：编辑、构建与旧档兼容](story-json-graph.md)
