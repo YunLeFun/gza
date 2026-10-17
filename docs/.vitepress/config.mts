@@ -1,6 +1,6 @@
 import { defineConfig } from "vitepress";
 import { fileURLToPath } from "node:url";
-const siteOrigin = "https://docs.gza.yunle.fun";
+const siteOrigin = "https://gza.yunle.fun";
 const base = process.env.DOCS_BASE || "/";
 if (!/^\/(?:[a-zA-Z0-9_-]+\/)*$/.test(base)) {
   throw new Error("DOCS_BASE 必须为 / 或 /manual/ 这样的目录路径，且以 / 开头和结尾。");

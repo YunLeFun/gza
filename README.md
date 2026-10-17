@@ -6,7 +6,7 @@
 
 公开仓库使用标准 GitHub-hosted runner，按当前规则免费使用构建分钟；本工作流构建同一 GZA 项目，不配置 larger runner、收费存储或自动发布。工作流日志公开，可包含私有源仓库的文件名、诊断内容或源码片段，维护者已接受这一过渡方式。[GitHub Actions 计费](https://docs.github.com/en/billing/concepts/product-billing/github-actions)
 
-- [官方文档与玩家手册](https://docs.gza.yunle.fun/)
+- [官方网站与玩家手册](https://gza.yunle.fun/)
 - [文档维护与部署](docs/README.md)
 - [构建配置和触发方法](docs/private-build.md)
 - [许可范围及未来源码迁移方案](docs/licensing.md)

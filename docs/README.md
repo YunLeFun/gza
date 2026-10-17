@@ -1,6 +1,6 @@
 # GZA 文档维护
 
-公开文档的唯一维护位置是 [YunLeFun/gza](https://github.com/YunLeFun/gza) 的 `docs/`。正式入口保持 [docs.gza.yunle.fun](https://docs.gza.yunle.fun/)。游戏与桌面客户端源码暂时留在私有 `dayun-kicker`；文档独立安装、检查和构建，无需读取私有仓库或提供任何云服务凭证。
+公开文档的唯一维护位置是 [YunLeFun/gza](https://github.com/YunLeFun/gza) 的 `docs/`。正式入口为 [gza.yunle.fun](https://gza.yunle.fun/)；旧入口 `docs.gza.yunle.fun` 按原路径与查询参数 301 跳转到正式域名，长期保留。游戏与桌面客户端源码暂时留在私有 `dayun-kicker`；文档独立安装、检查和构建，无需读取私有仓库或提供任何云服务凭证。
 
 ```sh
 pnpm install --frozen-lockfile
@@ -37,8 +37,8 @@ VitePress 配置、主题和展示组件在 `.vitepress/`；保留原有 UI toke
 | 构建 | `npx --yes pnpm@11.10.0 run typecheck && npx --yes pnpm@11.10.0 run build` |
 | 输出 | `.vitepress/dist` |
 | Node.js | `22.21.1` |
-| 域名 | `docs.gza.yunle.fun` |
-| CNAME | `docs.gza.yunle.fun.pages.dnsoe5.com` |
+| 域名 | `gza.yunle.fun`（正式）；`docs.gza.yunle.fun`（Cloudflare 301 跳转） |
+| CNAME | `gza.yunle.fun.pages.dnsoe4.com`（DNS-only，以 EdgeOne 控制台为准） |
 
 平台读取 `docs/edgeone.json`；保留静态站点安全头、HTTPS 和 HTTP 301 跳转。根锁文件与 pnpm workspace 一并提交，日常更新推送后由 Git 集成自动部署。GitHub Actions 独立验证文档，不保存 artifact，不读取 `PRIVATE_SOURCE_TOKEN`。
 
