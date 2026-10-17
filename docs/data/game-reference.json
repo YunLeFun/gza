@@ -452,6 +452,12 @@
       "bytes": 3796
     },
     {
+      "path": "apps/dayun-kicker/src/render/sharedBikeModel.ts",
+      "sha256": "e08657824acad69cd30176044353dca33eaa9551e210e71cbbe7806baea0afd0",
+      "bytes": 4277,
+      "sourceHead": "b3dc545e223ca7a47cd89b402592bc29776ca9e7"
+    },
+    {
       "path": "apps/dayun-kicker/src/render/skinAccessories.ts",
       "sha256": "5abce886876bddeaa7932d8306b7d10d8b29df788f50c0a6bacb36959c88c47b",
       "bytes": 2709

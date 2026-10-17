@@ -89,6 +89,10 @@ export async function createVehiclePreviewModel(id: string): Promise<THREE.Group
       const { createScooterPreviewModel } = await import("./createScooterPreviewModel");
       return createScooterPreviewModel();
     }
+    case "shared-bike": {
+      const { createSharedBikeModel } = await import("../../../game-reference/apps/dayun-kicker/src/render/sharedBikeModel");
+      return createSharedBikeModel();
+    }
     case "tank": {
       const { createTankModel } = await import("../../../game-reference/apps/dayun-kicker/src/district/tankModel");
       const tank = createTankModel();

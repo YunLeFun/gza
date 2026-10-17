@@ -37,5 +37,6 @@ export const VEHICLE_CATALOG: readonly VehicleCatalogEntry[] = [
   { id: "roller", name: "压路机", category: "construction", features: "宽钢滚筒、后轮与操作驾驶室。", usage: "比赛 · 工程交通车辆" },
   { id: "loader", name: "装载机", category: "construction", features: "前铲斗、升降臂与四轮底盘。", usage: "比赛 · 工程交通车辆" },
   { id: "scooter", name: "玩家电驴", category: "playable", features: "踏板车身、坐垫与双轮，图示为默认车辆外观。", usage: "主要骑行载具 · 可更换套装" },
+  { id: "shared-bike", name: "云骑共享单车", category: "playable", features: "青绿车架、前车筐、后置智能锁与脚撑，原创虚构品牌。", usage: "Godot 城市 · 停放点扫码骑行" },
   { id: "tank", name: "彩蛋坦克", category: "playable", features: "履带底盘、独立炮塔与长炮管。", usage: "广州街区 · 彩蛋驾驶与战斗" },
 ];
