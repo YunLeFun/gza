@@ -18,6 +18,7 @@ export default defineConfig({
   metaChunk: true,
   lastUpdated: true,
   vite: {
+    define: { __MODEL_CATALOG_BASE__: JSON.stringify(process.env.GZA_MODEL_CATALOG_BASE || ""), __WEAPON_MODEL_BASE__: JSON.stringify(process.env.GZA_WEAPON_MODEL_BASE || "") },
     resolve: { alias: { "@yunlefun/dayun-kicker-coop": fileURLToPath(new URL("./game-reference/packages/dayun-kicker-coop/src/docs.ts", import.meta.url)) } },
     // esbuild 0.28 no longer lowers destructuring for legacy targets.
     // All supported documentation browsers parse it.
@@ -80,6 +81,8 @@ export default defineConfig({
           { text: "角色与载具", link: "/game/characters" },
           { text: "车辆建模图鉴", link: "/vehicle-models" },
           { text: "物品图鉴", link: "/item-catalog" },
+          { text: "武器模型预览", link: "/weapon-models" },
+          { text: "模型素材目录", link: "/model-library" },
           { text: "广州地图预览", link: "/map-preview" },
           { text: "电动车皮肤", link: "/scooter-skins" },
           { text: "玩法设定", link: "/game/modes" },

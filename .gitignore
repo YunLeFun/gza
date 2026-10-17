@@ -26,3 +26,6 @@ id_ed25519
 # Map geometry is restored from the pinned COS manifest.
 docs/data/map-roads.json
 docs/data/map-shapes.json
+
+# Local model media stays outside Git; publish through the shared media pipeline.
+docs/public/models/

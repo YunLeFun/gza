@@ -16,7 +16,9 @@
     "assets:git-check": "node scripts/check-git-assets.mjs",
     "assets:publish": "node scripts/publish-media-assets.mjs",
     "assets:pull": "node scripts/media-assets.mjs",
-    "assets:check": "node scripts/media-assets.mjs --check"
+    "assets:check": "node scripts/media-assets.mjs --check",
+    "docs:weapons-check": "node scripts/check-weapon-preview.mjs",
+    "docs:models-check": "node scripts/check-model-catalog.mjs"
   },
   "devDependencies": {
     "cos-nodejs-sdk-v5": "3.0.0"
