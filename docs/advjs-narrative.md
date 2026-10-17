@@ -4,7 +4,7 @@
 
 ## 本地运行
 
-应用通过 workspace 依赖使用仓库中的 [`vendor/advjs/`](https://github.com/YunLeFun/dayun-kicker/blob/main/vendor/advjs/README.md) 固定 SDK 快照，版本为 `0.1.4-dayun.2`。快照保留所需运行时、编译器、解析器、类型、源码和 MPL-2.0 授权，独立 CI checkout 可直接安装与构建，不依赖开发者机器上的 ADV.JS 工作区。npm 发布版尚不包含当前使用的统一运行时入口；上游发布兼容版本后再替换为固定 npm 版本。
+应用通过 workspace 依赖使用仓库中的 [`vendor/advjs/`](https://github.com/YunLeFun/dayun-kicker/blob/main/vendor/advjs/README.md) 固定 SDK 快照，版本为 `0.1.4-dayun.8`。快照保留所需运行时、编译器、解析器、类型、源码和 MPL-2.0 授权，独立 CI checkout 可直接安装与构建，不依赖开发者机器上的 ADV.JS 工作区。npm 发布版尚不包含当前使用的统一运行时入口；上游发布兼容版本后再替换为固定 npm 版本。
 
 网页同时公开对应的普通源码文件、构建元数据、来源与许可证，见 [ADV.JS 发布依赖与源码说明](./advjs-release-snapshot.md)。使用已提交的 workspace 快照，不从本机上游自动覆盖，不将依赖或源码压缩包加入 Git。
 
@@ -18,13 +18,15 @@ pnpm dev
 
 从首页进入「剧情模式」并开始骑手故事，沿导航到 TIT。自由模式也可点击「拜访客村骑手站」。停稳后使用「与陈叔交谈」按钮或键盘 E；手柄沿用交互键。对白选项可通过 Tab / Enter 或手柄方向 / A 操作，Esc / B 离开。首次可登记骑手，再次交谈可接园区午餐；已有配送时不会提供新订单。剧情模式与自由模式复用这套对白、任务和存档，模式切换保留已完成的业务操作。
 
+当前 JSON 节点图、可视化编辑器、预览及向 ADV.JS 的分批迁移见[共享剧情创作说明](./story-json-graph.md)。
+
 ## 模块边界
 
 | 模块 | 职责 |
 | --- | --- |
-| `src/district/story/courier-station.adv.md` | 可编辑的对白、稳定选项 ID、条件与分支 |
-| `scripts/build-story.mjs` | 使用 `@advjs/core/compiler` 编译、校验并生成 JSON |
-| `src/district/story/session.ts` | 按需加载 `@advjs/core/runtime`，处理剧情与宿主活动 |
+| `packages/dayun-kicker-content/data/chapters/zhou-hai-re.json` | 唯一手写章节源：对白、稳定选项 ID、JSON 条件与世界流程 |
+| `scripts/build-story.mjs` / `scripts/story-pipeline.ts` | 校验共享 JSON，并生成 Web / Godot 兼容产物 |
+| `src/district/story/session.ts` / 共享 `chapter-story.ts` | 按需加载运行时，复用宿主扩展声明并处理活动结果 |
 | `src/district/story/controller.ts` | 加载取消、连续点击保护、展示状态与快照 |
 | `src/district/ui/StoryDialogue.vue` | Reka Dialog、共享游戏组件和设计 token |
 | `src/district/main.ts` | 交谈距离、输入 / 时间冻结、登记与接单规则 |
@@ -72,9 +74,9 @@ ADV.JS 上游增加 `@advjs/core/runtime` / `@advjs/core/compiler` 公共子入�
 
 ```text
 读取仓库约定、docs/advjs-narrative.md 和 docs/ui-components.md。
-剧情源为 apps/dayun-kicker/src/district/story/courier-station.adv.md，
+剧情源为 packages/dayun-kicker-content/data/chapters/zhou-hai-re.json，
 生成 JSON 使用 pnpm story:build，校验使用 pnpm story:check。
-宿主插件 courier/service 只允许 operation=register，或 operation=accept 且 orderId 在 STORY_ORDER_IDS 白名单内。
+宿主插件 courier/service 允许 register、accept、finishChapter；接单的 orderId 必须在章节订单白名单内，收尾须通过章节完成条件。
 任务接受还需验证实际位置、背包空间与章节前置条件。
 registered、hasOrder、completed 从现有骑手和配送状态刷新；剧情不直接发放奖励。
 修改对白保留稳定选项 ID、显式锚点和分支 end；同步生成产物。
