@@ -26,7 +26,7 @@
 
 `fullscreen` 显示全屏按钮；可选 `mirror`、`mirrorDisabled` 和 `update:mirror` 仅展示街区后视镜状态，由街区管理开启、加载和渲染。后视镜每次进入默认关闭，手动开启才加载。街区镜子使用 `#render-mirror`，复用 `GameSwitch`。
 
-面板直接使用共享翻译实例，可按需挂载到没有安装翻译插件的合作入口；语言选择保持响应式。合作模式的输入将 Select 浮层和 Dialog 内的 Escape 留给 Reka，关闭下拉框时不同时切换游戏菜单，场景内 Escape 仍可打开菜单。
+面板直接使用共享翻译实例，可按需挂载到没有安装翻译插件的合作入口；语言选择保持响应式。 `DisplayControls` 的 `language` 属性显示共享 `LanguageControl`（默认隐藏）；它只负责语言选择，`id` 默认为 `locale-select`，`description` 默认为开启。首页通用设置、街区欢迎页、地图画面设置、合作候场与暂停菜单共用 `dayun-kicker.locale`，立即更新且可跨入口恢复。街区及合作 UI 的文本目录随世界入口加载，首章对白与选项在展示边界翻译，任务 ID、存档和世界地理数据不随语言改变。合作模式的输入将 Select 浮层和 Dialog 内的 Escape 留给 Reka，关闭下拉框时不同时切换游戏菜单，场景内 Escape 仍可打开菜单。
 
 自由探索的 `DistrictZombieChallenge` 按需复用 `useCityCoopGame`、`CityHud`、`CityTouchControls` 和 `CitySessionMenu`。本地挑战借用 `#game-root` 及原来的 `#game-canvas`，不创建另一个 WebGL 上下文或城市场景；暂停、结算的 `sceneId` 指定焦点返回节点，`leaveLabel` 指定退出文案，默认值继续兼容独立联机入口。街区欢迎页、暂停菜单和城市游览设置通过 `zombies` 事件请求挑战，出生点、模拟暂停及返回状态由街区宿主管理。共享城市战斗 CSS 不包含页面全局重置，独立入口另加载 `city-coop/page.css`。
 
@@ -239,3 +239,27 @@ Vite 模块清单属于构建校验数据，构建后保存在 `apps/dayun-kicke
 菜单中的兼容 `.menu-action` 样式由使用它的按需组件引入 `menu-action.css`，保持原有视觉和事件；公共首屏样式继续遵守 16 KiB 预算，不把可选诊断和菜单样式加入常驻入口。
 
 街区合作、旧合作和 Steam 竞速 HUD 显示真实连接状态，展开可看 RTT 波动、快照年龄和同步频率。开发／云端合作复用已确认的心跳，Steam 客户端通过房主回包计算本地单调时钟的 RTT；房主标明权威房主，本地挑战标明本地。没有采样、测量过期或断线时 RTT 显示不可用，不能以 0 ms 代替；真实测得的 0 ms 仍是有效结果。同步停滞独立显示，不能据快照年龄改写有效 RTT。旧云端竞速 SDK 没有已确认的 RTT 探针，保留 RTT 不可用，显示其实际快照的连接状态与同步频率。网络展开使用原生 details，支持键盘操作，不使用逐帧 live region 播报。
+
+## 突围战斗提示与情境标记
+
+`CityHud` 的可选 `combatFeedback` 提供确认命中、击倒、格挡、救援和倒地的短时展示，`worldPings` 提供经当前相机投影与建筑遮挡过滤的标记；`ping` 事件交给宿主发送按键意图。`CityCombatFeedback` 只展示文字和确认符号，不重复播报连续攻击；`showHitMarker=false` 时隐藏中心符号，适用于斜俯视的指向瞄准。`CityPingHud` 从权威标记派生发送者、距离与相对方位，只有新增标记进入独立 live region；场景标签使用 `aria-hidden` 避免重复播报。所有提示复用现有语义色、字号、间距和面板 token。
+
+`CityTouchControls` 的「标记」是单次 action，倒地时仍可使用；移动、开火与救援继续使用原有 pointer capture 和释放流程。桌面 G、手柄方向键左与触屏按钮共用同一 action；菜单、失焦与新对局释放待发请求，输入框不拦截 G。宿主处理瞬时反馈生命周期、网络同步和场景投影，展示组件不持有权威规则。
+
+## 移动救援 HUD 与输入
+
+`CityRescueHud` 展示权威任务的阶段、方向、距离、长按进度与全员集合人数，沿用 `#city-wave` 并增加 `#city-rescue-mission`、`data-mission-stage` 与 `#city-mission-target`。场景标签来自宿主 `missionTarget` 投影，只做展示，阶段变化使用单独 live region，距离和进度变化不重复播报。
+
+`CityTouchControls` 的可选 `objectiveLabel / canObjective` 控制独立任务按钮 `#city-objective-action`，沿用 `GameButton` 和指针捕获；按住、取消、失去捕获、阶段变化及卸载均释放任务意图；聚焦按钮也可用 Space／Enter 长按，失焦释放。物资与救人阶段将跳跃、奔跑、队友救援和工具收在「更多」中，保留任务、移动、开火与上下车的直接操作。F 和标准手柄方向键下使用同一 held 输入；宿主只释放任务长按，保留移动和开火等独立操作。物资和幸存者的距离、通路、落地与下车条件由权威再次校验。
+
+## 剧情创作控件
+
+本地剧情编辑器通过 `@advjs/gui/authoring` 复用画布、条件检查器和诊断面板。共享入口不带配色与按钮皮肤，不进入游戏运行包；`StoryGraph`、`ConditionField`、`ChapterDiagnostics` 是 GZA 的展示适配层，继续使用本页 `--ui-*` token 与 `GameButton`。保留 `data-node-id`、原表单标签、画布方向键 / Home、焦点及指针释放行为。
+
+条件解析与校验由 GZA 内容适配器调用原章节校验器；通用控件不认识订单、位置和清场规则。无法解析的 JSON 保留为草稿，校验问题可定位回节点或完整 JSON，超过一页时提供分页。控件无文件或玩家存档写入能力，保存仍使用原本地服务、备份与版本校验。
+
+剧情预览通过 `AdvPreviewPlayer`、`AdvVariableInspector`、`AdvPreviewTrace` 复用对白、变量分组和轨迹交互。GZA 薄封装通过 slot 注入 GameButton / GameSwitch / EditorSelect，并用 `--ui-*` token 处理三栏布局、只读事实、错误和窄屏滚动。共享模块不持有配色或业务状态；`preview-adapter.ts` 把变更事件映射为 GZA 内存命令。保留原可访问名称、`data-preview-choice` / `data-preview-action`、流程与对白节点定位行为；所有控件随预览忙碌、草稿无效或过期状态禁用。
+
+Editor SDK 内的 GZA 工作台在构建阶段通过适配层复用 AGUI Button / Switch / Select / Panel，局部 `--ui-*` 兼容变量映射到宿主 AGUI 语义 token，随 Editor 明暗主题变化；不引入游戏全局 token 或独立色板。现有工作台样式限定到 `.gza-workbench`，不改宿主 body 和控件。面板按容器宽度调整布局，窄面板保持检查器、保存与预览可用。独立入口继续使用游戏 UI 组件与原 token。
+
+Electron 工作台把未保存状态通过 Editor SDK 文档服务汇总到原生标题、保存菜单和 AGUI 状态栏，保留 GZA 字段及保存错误提示。标签隐藏仍参与保存；校验失败或冲突不消除脏标记。关闭使用原生确认，避免与浏览器提示重复；有脏文档时插件停用按钮报告原因并保留面板。

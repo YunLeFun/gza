@@ -1,15 +1,17 @@
-# 僵尸突围 v3 的 Play 云端适配
+# 僵尸突围 v5 的 Play 云端适配
 
-「僵尸突围」统一使用 1–4 人城市规则，同一局内步行、寻找电动车、骑行、双座共乘及停车下车。客户端、BFF 与 CloudBase ticket 门禁升级为 `dayun-city-coop-v3`，保留 `kicker_city_room` audience 和原有生产开关。旧两人固定路线房保留在 `/coop-legacy.html`，不会自动迁移到新规则。
+「僵尸突围」统一使用 1–4 人城市规则，同一局内步行、寻找电动车、骑行、双座共乘及停车下车。客户端、BFF 与 CloudBase ticket 门禁升级为 `dayun-city-coop-v5`，保留 `kicker_city_room` audience 和原有生产开关。旧两人固定路线房保留在 `/coop-legacy.html`，不会自动迁移到新规则。
 
 原 v2 适配基于 `7d4cc665`；v3 在同一权威规则中增加上下车请求、车辆操控、座位和车辆快照，保留近战、地图组装/索引和 Steam/本地适配器。
 `CityRoomState` 新增兼容 authority `cloud-server`，独立云端契约、终止 API 与 manifest payload
 位于纯规则包；平台 SDK、BFF 和 Play 的房间实现负责网络。没有新后台仓库，也没有迁移权益购买。
 
+v4 新增有序情境标记请求及独立标记快照，规则 hash 包含 1.2 秒冷却、6 秒过期和目标判定范围，并保留已有出生安全规则。v5 增加移动救援阶段、持续交互、幸存者跟随／载具和集合撤离，规则实现为 `moving-rescue-v7`。v4 及更旧客户端不能加入 v5 房间；云端规则制品、服务端版本归档和票据门禁必须一起升级。源码适配不表示生产云端已部署。
+
 ## 接口
 
 SDK `connectKickerCityRoom({ roomId, create, manifest, onEvent, onStatus })` 复用当前 cookie 会话和 CSRF。
-manifest 由 `createCityCloudManifest(world)` 对自己的完整世界计算，包含 v3 协议、规则 hash、地图 hash 和地图 ID。
+manifest 由 `createCityCloudManifest(world)` 对自己的完整世界计算，包含 v5 协议、规则 hash、地图 hash 和地图 ID。
 票据从同源 `/api/realtime-ticket` 的 `mode: 'city'` 分支换取，服务端使用既有信任凭证调用
 Play `/v1/realtime/city-tickets`，绑定 `kicker_city_room` audience、房号和版本。
 首个合法收件人的 cloud 状态必须在 3 秒内确认全部版本；确认前不接受快照或发送输入。
@@ -30,7 +32,7 @@ Play `/v1/realtime/city-tickets`，绑定 `kicker_city_room` audience、房号�
 SDK 禁用自动重连且不跨连接重放旧动作，状态声明 `recovery.supported=false`。
 进程重启不能恢复旧房间：显式创建新房。这里没有持久化 checkpoint 或跨进程恢复实现。
 
-本轮没有执行外部部署。发布前须让 Play 的城市房依赖使用本次 v3 权威包，重新导出完整地图 manifest，并同步私有归档 integrity、服务端版本校验和客户端。当前工作区的 Play checkout 只有旧双座房实现，不能把其已上线记录当作 v3 城市房已上线；生产开关保持关闭。真实账号、CloudBase store、镜像与容量验收仍需实际环境完成。
+本轮没有执行外部部署。发布前须让 Play 的城市房依赖使用本次 v5 权威包，重新导出完整地图 manifest，并同步私有归档 integrity、服务端版本校验和客户端。当前工作区的 Play checkout 只有旧双座房实现，不能把其已上线记录当作 v5 城市房已上线；生产开关保持关闭。真实账号、CloudBase store、镜像与容量验收仍需实际环境完成。
 
 ## 离线权威地图导出
 
