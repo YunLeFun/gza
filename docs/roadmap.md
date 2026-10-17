@@ -1,5 +1,17 @@
 # Roadmap
 
+## Godot 迁移主线（2026-10-16）
+
+原生引擎确定为 Godot，当前执行顺序以 [完整迁移计划](godot-migration.md) 为准。下方已完成项继续表示原有 Web / Electron 或服务端的实现，不等同于原生版验收通过。
+
+- [ ] M0：冻结完整基线、迁移台账、首章地点范围、兼容与目标设备门槛。
+- [ ] M1：生产工程、共享资源与数据导入、物理扩展、Windows 原生薄包。
+- [ ] M2：完整「粥还热」、客村 / TIT 生活街区、原生 UI / 输入与存档。
+- [ ] M3：旧档导入、性能与离线发行验收；通过后切默认原生客户端。
+- [ ] M4：先在已有内容上实现有界分块、跨块通行、卸载与恢复。
+- [ ] M5：逐个相邻街区扩展，每区有任务、生活内容和独立验收。
+- [ ] M6：按功能包回迁经典赛事、其他城市设施、多人、平台服务与手机，逐项记录延期和完成证据。
+
 ## GZA：暴力电驴 · GuangZhou Action
 
 The first release is **GZA：暴力电驴**. **GZA** stands for **GuangZhou Action（广州行动）**, with **暴力电驴** as the first release subtitle. Classic scooter modes and city exploration share this brand. See [the direction and acceptance criteria](gza-direction.md).
