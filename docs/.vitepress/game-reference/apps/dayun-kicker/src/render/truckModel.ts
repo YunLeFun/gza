@@ -3,7 +3,7 @@ import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.j
 import type { TruckRole, TruckVariant } from "../game/types";
 import { createWorkVehicle } from "./workVehicle";
 import { createConstructionBody } from "./constructionVehicle";
-import { createMunicipalBody, MUNICIPAL_BODY_COLOR } from "./municipalVehicle";
+import { createMunicipalBody, createSprinklerSpray, MUNICIPAL_BODY_COLOR } from "./municipalVehicle";
 import yunleLogoUrl from "../assets/yunle-logo.svg";
 import { HARBOR_COLORS as C } from "../config/render/environment";
 
@@ -56,6 +56,7 @@ export function createTruckMesh(id: number, direction: -1 | 1, variant: TruckVar
   });
   const chromeMaterial = new THREE.MeshStandardMaterial({ color: "#d6d2c6", roughness: 0.24, metalness: 0.85 });
   addVariantBody(visual, variant, cargoMaterial, darkMaterial, chromeMaterial);
+  if (variant === "sprinkler") visual.add(createSprinklerSpray());
 
   const cab = new THREE.Mesh(new RoundedBoxGeometry(TRUCK_WIDTH * 0.96, 1.52, 1.65, 1, 0.085), cabMaterial);
   cab.position.set(0, 1.03, -2.08);

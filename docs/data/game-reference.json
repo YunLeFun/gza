@@ -397,9 +397,9 @@
     },
     {
       "path": "apps/dayun-kicker/src/render/municipalVehicle.ts",
-      "sha256": "75632812a6988b93d5cf42e5cb113e43f324bc696cac8e128b9d3f3f64416864",
-      "bytes": 5310,
-      "sourceHead": "f26b832217d25db11824ab434b07ceea3a3945a4"
+      "sha256": "975dc3e6b3fc473f78eccaf33ef9baff0a9a18b3f28eebec7c174ea328769ddd",
+      "bytes": 8941,
+      "sourceHead": "fea47f51744032e2aac7ef09c8819241a815bcd9"
     },
     {
       "path": "apps/dayun-kicker/src/render/nodeMaterials.ts",
@@ -473,9 +473,9 @@
     },
     {
       "path": "apps/dayun-kicker/src/render/truckModel.ts",
-      "sha256": "a32bb0bb1396a57810375f6744075f912abbbb1c2cd3ca2dd4136ad7270c28d4",
-      "bytes": 16221,
-      "sourceHead": "f26b832217d25db11824ab434b07ceea3a3945a4"
+      "sha256": "a4021394cd1f2424fa2831df043246c9abfcb77b3e508bde4ec10b271d85e185",
+      "bytes": 16310,
+      "sourceHead": "fea47f51744032e2aac7ef09c8819241a815bcd9"
     },
     {
       "path": "apps/dayun-kicker/src/render/vanModel.ts",

@@ -17,6 +17,7 @@ export function createMunicipalBody(
   group.name = `municipal-${variant}`;
   const stripe = new THREE.MeshStandardMaterial({ color: MUNICIPAL_STRIPE_COLOR, roughness: 0.55 });
   const lamp = new THREE.MeshStandardMaterial({ color: "#ffd166", emissive: "#ff9f1c", emissiveIntensity: 0.9 });
+  group.userData.serviceLamp = lamp;
   const add = <T extends THREE.Mesh>(mesh: T, name: string, position: [number, number, number]) => {
     mesh.name = name;
     mesh.position.set(...position);
@@ -104,4 +105,84 @@ export function createMunicipalBody(
     ram.rotation.x = -0.35;
   }
   return group;
+}
+
+export interface MunicipalEffects {
+  lamp: THREE.MeshStandardMaterial | null;
+  spray: THREE.Group | null;
+}
+
+/**
+ * Translucent spray fans and a fading wet strip behind the sprinkler. They are
+ * kept out of the collider body and the static batch (transparent materials),
+ * and stay hidden until animateMunicipalEffects runs.
+ */
+export function createSprinklerSpray() {
+  const group = new THREE.Group();
+  group.name = "sprinkler-spray";
+  // Static previews show the clean truck; the race loop reveals the spray.
+  group.visible = false;
+  const water = new THREE.MeshBasicMaterial({
+    color: "#dff3ff", transparent: true, opacity: 0.34, depthWrite: false, side: THREE.DoubleSide,
+  });
+  const wet = new THREE.MeshBasicMaterial({
+    color: "#1b262b", transparent: true, opacity: 0.26, depthWrite: false,
+    polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2,
+  });
+  const fan = (name: string, points: readonly (readonly [number, number, number])[]) => {
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(points.flat(), 3));
+    geometry.setIndex([0, 1, 2, 0, 2, 3]);
+    geometry.computeVertexNormals();
+    const mesh = new THREE.Mesh(geometry, water);
+    mesh.name = name;
+    mesh.renderOrder = 2;
+    group.add(mesh);
+    return mesh;
+  };
+  // Rear bar: a low sheet hitting the road and a lighter mist arc above it.
+  fan("spray-sheet", [[-1.05, 0.24, 2.92], [1.05, 0.24, 2.92], [1.6, 0.02, 4.7], [-1.6, 0.02, 4.7]]);
+  fan("spray-mist", [[-0.95, 0.3, 2.95], [0.95, 0.3, 2.95], [1.75, 0.7, 4.1], [-1.75, 0.7, 4.1]]);
+  for (const side of [-1, 1]) {
+    fan("side-spray", [
+      [side * 1.2, 0.38, -1.15], [side * 1.2, 0.3, -0.95], [side * 2.5, 0.02, -0.45], [side * 2.5, 0.02, -1.45],
+    ]);
+  }
+  for (const [name, from, to, opacity] of [["wet-trail-near", 2.9, 13, 1], ["wet-trail-far", 13, 24, 0.45]] as const) {
+    const material = opacity === 1 ? wet : wet.clone();
+    material.opacity = wet.opacity * opacity;
+    const strip = new THREE.Mesh(new THREE.PlaneGeometry(2.7, to - from), material);
+    strip.name = name;
+    strip.rotation.x = -Math.PI / 2;
+    strip.position.set(0, -0.015, (from + to) / 2);
+    strip.renderOrder = 1;
+    group.add(strip);
+  }
+  group.userData.water = water;
+  return group;
+}
+
+export function findMunicipalEffects(root: THREE.Object3D): MunicipalEffects {
+  let lamp: THREE.MeshStandardMaterial | null = null;
+  let spray: THREE.Group | null = null;
+  root.traverse(object => {
+    if (object.userData.serviceLamp instanceof THREE.MeshStandardMaterial) lamp = object.userData.serviceLamp;
+    if (object.name === "sprinkler-spray" && object instanceof THREE.Group) spray = object;
+  });
+  return { lamp, spray };
+}
+
+/** Flashing work lamps and a flickering spray while the truck cruises upright. */
+export function animateMunicipalEffects(effects: MunicipalEffects, elapsed: number, active: boolean) {
+  const time = Number.isFinite(elapsed) ? elapsed : 0;
+  if (effects.lamp) effects.lamp.emissiveIntensity = active && Math.sin(time * 7.5) > 0.15 ? 1.8 : 0.35;
+  if (!effects.spray) return;
+  effects.spray.visible = active;
+  if (!active) return;
+  const water = effects.spray.userData.water as THREE.MeshBasicMaterial | undefined;
+  if (water) water.opacity = 0.3 + 0.07 * Math.sin(time * 17);
+  // Sheets are authored in place, so the flutter is a small offset, not a scale.
+  effects.spray.children.forEach((part, index) => {
+    if (!part.name.startsWith("wet-trail")) part.position.y = 0.03 * Math.sin(time * 23 + index * 1.9);
+  });
 }
