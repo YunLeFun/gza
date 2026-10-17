@@ -49,7 +49,7 @@ function createStreetPreview(parts: StreetModelParts): THREE.Group {
   return group;
 }
 
-const TRUCK_PREVIEW_IDS = ["cargo", "tanker", "flatbed", "dump", "mixer", "crane", "excavator", "heavy"] as const;
+const TRUCK_PREVIEW_IDS = ["cargo", "tanker", "flatbed", "dump", "mixer", "crane", "excavator", "heavy", "sprinkler", "sanitation"] as const;
 type TruckPreviewId = typeof TRUCK_PREVIEW_IDS[number];
 
 /**

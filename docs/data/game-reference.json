@@ -351,8 +351,9 @@
     },
     {
       "path": "apps/dayun-kicker/src/game/types.ts",
-      "sha256": "51b125c9bf4ac745662677845da728cf6e4e17c7c6fd8a64788f466d926af5c3",
-      "bytes": 3576
+      "sha256": "76d3c024205e3e1fbb77a54a7fd28cf34a4c95178a9e538f8b27b079b4e4f1ab",
+      "bytes": 3605,
+      "sourceHead": "f26b832217d25db11824ab434b07ceea3a3945a4"
     },
     {
       "path": "apps/dayun-kicker/src/render/busModel.ts",
@@ -393,6 +394,12 @@
       "path": "apps/dayun-kicker/src/render/lowPolyTrees.ts",
       "sha256": "1e374a822b915cc15abad622236ee53da7fb12be0ebb034ad26809e94c28d709",
       "bytes": 8322
+    },
+    {
+      "path": "apps/dayun-kicker/src/render/municipalVehicle.ts",
+      "sha256": "75632812a6988b93d5cf42e5cb113e43f324bc696cac8e128b9d3f3f64416864",
+      "bytes": 5310,
+      "sourceHead": "f26b832217d25db11824ab434b07ceea3a3945a4"
     },
     {
       "path": "apps/dayun-kicker/src/render/nodeMaterials.ts",
@@ -466,8 +473,9 @@
     },
     {
       "path": "apps/dayun-kicker/src/render/truckModel.ts",
-      "sha256": "943b35bd94e91bb7a8c8de933c8704ae8cc25708fb66d013966f02866bf52dc1",
-      "bytes": 15594
+      "sha256": "a32bb0bb1396a57810375f6744075f912abbbb1c2cd3ca2dd4136ad7270c28d4",
+      "bytes": 16221,
+      "sourceHead": "f26b832217d25db11824ab434b07ceea3a3945a4"
     },
     {
       "path": "apps/dayun-kicker/src/render/vanModel.ts",

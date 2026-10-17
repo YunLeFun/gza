@@ -3,6 +3,7 @@ import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.j
 import type { TruckRole, TruckVariant } from "../game/types";
 import { createWorkVehicle } from "./workVehicle";
 import { createConstructionBody } from "./constructionVehicle";
+import { createMunicipalBody, MUNICIPAL_BODY_COLOR } from "./municipalVehicle";
 import yunleLogoUrl from "../assets/yunle-logo.svg";
 import { HARBOR_COLORS as C } from "../config/render/environment";
 
@@ -36,10 +37,12 @@ export function createTruckMesh(id: number, direction: -1 | 1, variant: TruckVar
     return group;
   }
 
-  const color = variant === "heavy" ? C.navy : palette[id % palette.length];
+  const municipal = variant === "sprinkler" || variant === "sanitation";
+  const color = municipal ? MUNICIPAL_BODY_COLOR : variant === "heavy" ? C.navy : palette[id % palette.length];
   const cargoMaterial = new THREE.MeshStandardMaterial({ color, roughness: 0.58, metalness: 0.04 });
   const cabMaterial = new THREE.MeshStandardMaterial({
-    color: variant === "heavy" ? C.coral : cabPalette[Math.floor(id / palette.length) % cabPalette.length],
+    color: municipal ? MUNICIPAL_BODY_COLOR
+      : variant === "heavy" ? C.coral : cabPalette[Math.floor(id / palette.length) % cabPalette.length],
     roughness: 0.3,
     metalness: 0.06,
   });
@@ -98,21 +101,8 @@ export function createTruckMesh(id: number, direction: -1 | 1, variant: TruckVar
     visual.add(grille);
   }
 
-  const labelMaterial = new THREE.MeshBasicMaterial({
-    map: createDayunTexture(color),
-    transparent: true,
-    depthWrite: false,
-  });
-  const construction = variant === "crane" || variant === "excavator";
-  const lowBody = variant === "flatbed" || variant === "dump" || construction;
-  const labelY = construction ? 0.66 : lowBody ? 0.94 : 1.42;
-  const labelHeight = construction ? 0.2 : lowBody ? 0.54 : variant === "mixer" ? 0.62 : 0.8;
-  [-1, 1].forEach((side) => {
-    const label = new THREE.Mesh(new THREE.PlaneGeometry(2.85, labelHeight), labelMaterial);
-    label.position.set(side * (TRUCK_WIDTH / 2 + 0.012), labelY, 0.78);
-    label.rotation.y = side > 0 ? Math.PI / 2 : -Math.PI / 2;
-    visual.add(label);
-  });
+  // City-service trucks carry their own livery instead of the Dayun freight label.
+  if (!municipal) addDayunLabels(visual, variant, color);
 
   if (role === "interference") {
     addInterferenceBeacons(visual);
@@ -223,6 +213,10 @@ function addVariantBody(
     visual.add(createConstructionBody(variant, darkMaterial, chromeMaterial));
     return;
   }
+  if (variant === "sprinkler" || variant === "sanitation") {
+    visual.add(createMunicipalBody(variant, cargoMaterial, darkMaterial, chromeMaterial));
+    return;
+  }
   if (variant === "tanker") {
     const chassis = new THREE.Mesh(new THREE.BoxGeometry(TRUCK_WIDTH * 0.94, 0.25, 4.25), darkMaterial);
     chassis.position.set(0, 0.52, 0.78);
@@ -325,6 +319,24 @@ function addVariantBody(
   cargo.castShadow = true;
   cargo.receiveShadow = true;
   visual.add(cargo);
+}
+
+function addDayunLabels(visual: THREE.Group, variant: TruckVariant, color: string) {
+  const labelMaterial = new THREE.MeshBasicMaterial({
+    map: createDayunTexture(color),
+    transparent: true,
+    depthWrite: false,
+  });
+  const construction = variant === "crane" || variant === "excavator";
+  const lowBody = variant === "flatbed" || variant === "dump" || construction;
+  const labelY = construction ? 0.66 : lowBody ? 0.94 : 1.42;
+  const labelHeight = construction ? 0.2 : lowBody ? 0.54 : variant === "mixer" ? 0.62 : 0.8;
+  [-1, 1].forEach((side) => {
+    const label = new THREE.Mesh(new THREE.PlaneGeometry(2.85, labelHeight), labelMaterial);
+    label.position.set(side * (TRUCK_WIDTH / 2 + 0.012), labelY, 0.78);
+    label.rotation.y = side > 0 ? Math.PI / 2 : -Math.PI / 2;
+    visual.add(label);
+  });
 }
 
 function addInterferenceBeacons(visual: THREE.Group) {

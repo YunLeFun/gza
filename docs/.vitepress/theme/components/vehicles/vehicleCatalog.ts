@@ -1,6 +1,7 @@
 export const VEHICLE_CATEGORIES = [
   { id: "street", label: "街头日常" },
   { id: "freight", label: "货运卡车" },
+  { id: "municipal", label: "城市服务" },
   { id: "construction", label: "工程车辆" },
   { id: "playable", label: "可驾驶载具" },
 ] as const;
@@ -26,6 +27,8 @@ export const VEHICLE_CATALOG: readonly VehicleCatalogEntry[] = [
   { id: "cargo", name: "厢式货车", category: "freight", features: "封闭货箱与独立驾驶室，是常见货运轮廓。", usage: "比赛 · 交通车辆" },
   { id: "tanker", name: "罐车", category: "freight", features: "横卧罐体、环形束带与底盘支架。", usage: "比赛 · 交通车辆 / 特定干扰车辆" },
   { id: "flatbed", name: "平板货车", category: "freight", features: "低平载货平台与堆放货箱。", usage: "比赛 · 交通车辆" },
+  { id: "sprinkler", name: "洒水车", category: "municipal", features: "椭圆水罐、尾部喷杆、侧喷头与后爬梯，白车身配绿色腰线。", usage: "比赛 · 城市服务交通车辆" },
+  { id: "sanitation", name: "压缩式环卫车", category: "municipal", features: "高箱体、斜置后装填斗、翻桶架与尾部警示条。", usage: "比赛 · 城市服务交通车辆" },
   { id: "heavy", name: "重型货车", category: "freight", features: "高顶导流罩、多轴轮组与排气管。", usage: "比赛 · 交通车辆" },
   { id: "dump", name: "自卸卡车", category: "construction", features: "敞口高边货斗与后部卸料门。", usage: "比赛 · 工程交通车辆" },
   { id: "mixer", name: "混凝土搅拌车", category: "construction", features: "倾斜搅拌罐、支撑架与后部出料结构。", usage: "比赛 · 工程交通车辆" },

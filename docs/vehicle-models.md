@@ -1,12 +1,12 @@
 ---
 title: 车辆建模图鉴
-description: 查看 GZA 的电动车、面包车、公交、大云货车与工程车辆模型，了解它们在街区和比赛中的用途。
+description: 查看 GZA 的电动车、面包车、公交、大云货车、城市服务车与工程车辆模型，了解它们在街区和比赛中的用途。
 outline: 2
 ---
 
 # 车辆建模图鉴
 
-GZA 的车辆用程序生成低多边形模型，通过车头、车身比例、窗带和工作部件区分车型。日常面包车、公交与工程车辆一起组成广州街景，电动车则是玩家骑行、配送与比赛的主要载具。
+GZA 的车辆用程序生成低多边形模型，通过车头、车身比例、窗带和工作部件区分车型。日常面包车、公交、城市服务车与工程车辆一起组成广州街景，电动车则是玩家骑行、配送与比赛的主要载具。
 
 玩家电动车的完整骑手套装、装备特征与获得方式，另见[电动车皮肤展示](/scooter-skins)。
 
@@ -40,12 +40,14 @@ GZA 的车辆用程序生成低多边形模型，通过车头、车身比例、�
 
 ## 比赛车流与工程车辆
 
-比赛中的大云汽车共用货车车头，再以货厢或工作部件区分用途。压路机和装载机采用独立的工程机械外形。它们作为比赛车流或干扰车辆参与碰撞、踢击和撞飞表现。
+比赛中的大云汽车共用货车车头，再以货厢或工作部件区分用途。洒水车和环卫车使用白车身、绿色腰线与琥珀色作业灯的原创城市服务涂装，不贴「大云汽车」侧标。压路机和装载机采用独立的工程机械外形。它们作为比赛车流或干扰车辆参与碰撞、踢击和撞飞表现。
 
 | 类型 | 技术标识 | 主要辨识特征 |
 | --- | --- | --- |
 | 厢式货车 | `cargo` | 封闭矩形货厢与「大云汽车」侧标 |
 | 罐式货车 | `tanker` | 圆柱罐体与环形束带 |
+| 洒水车 | `sprinkler` | 椭圆截面水罐、尾部喷杆与喷头、侧前喷头、后爬梯与罐顶护栏 |
+| 压缩式环卫车 | `sanitation` | 高箱体、后倾的后装填斗、翻桶挂架与尾部红白警示条 |
 | 平板货车 | `flatbed` | 开放货台与堆放货箱 |
 | 自卸货车 | `dump` | 高侧板车斗与外侧加强筋 |
 | 混凝土搅拌车 | `mixer` | 锥形搅拌罐、后部料斗与卸料槽 |
@@ -69,7 +71,7 @@ GZA 的车辆用程序生成低多边形模型，通过车头、车身比例、�
 | 面包车 | [车辆模型目录](https://github.com/YunLeFun/dayun-kicker/tree/main/apps/dayun-kicker/src/render)、[尺寸与涂装](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/config/district/streetActivity.ts) |
 | 公交与接驳车 | [模型部件](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/busModel.ts)、[新港中路公交机制](https://github.com/YunLeFun/gza/blob/main/docs/bus-transit.md) |
 | 街区停放车辆 | [停车布置](https://github.com/YunLeFun/dayun-kicker/blob/main/apps/dayun-kicker/src/district/streetActivity.ts)、[街区绘制](https://github.com/YunLeFun/dayun-kicker/blob/main/apps/dayun-kicker/src/district/people.ts) |
-| 大云货车与工程车辆 | [货车模型](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/truckModel.ts)、[工程机械](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/workVehicle.ts)、[吊臂与挖机](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/constructionVehicle.ts) |
+| 大云货车与工程车辆 | [货车模型](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/truckModel.ts)、[洒水车与环卫车](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/municipalVehicle.ts)、[工程机械](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/workVehicle.ts)、[吊臂与挖机](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/constructionVehicle.ts) |
 | 电动车 | [完整车辆构造](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/cockpitModel.ts)、[车身与双座结构](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/scooterBody.ts)、[骑手与载具组合](https://github.com/YunLeFun/dayun-kicker/blob/main/apps/dayun-kicker/src/render/scooterRig.ts) |
 | PANZER | [坦克模型](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/district/tankModel.ts) |
 | 路口小汽车 | [车辆模型](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/render/carModel.ts)、[横向车流](https://github.com/YunLeFun/dayun-kicker/blob/main/apps/dayun-kicker/src/render/crossTrafficCar.ts) |
