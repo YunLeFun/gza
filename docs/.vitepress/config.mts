@@ -99,7 +99,7 @@ export default defineConfig({
           { text: "常见问题", link: "/guide/faq" },
         ],
       },
-      { text: "参与项目", items: [{ text: "开发与文档维护", link: "/development" }, { text: "游戏开发待办", link: "/development-backlog" }, { text: "工程文档", link: "/engineering" }, { text: "路线图", link: "/roadmap" }, { text: "Steam Demo v0.1 计划", link: "/steam-demo-v0.1" }, { text: "Godot 迁移计划", link: "/godot-migration" }, { text: "Godot M2 进度", link: "/godot-m2" }, { text: "城市车流与共享单车", link: "/city-traffic" }, { text: "JSON 剧情配置", link: "/story-json-graph" }, { text: "AI 玩法设计（草案）", link: "/ai-gameplay" }, { text: "僵尸生存设计（草案）", link: "/zombie-survival" }, { text: "许可证", link: "/licensing" }] },
+      { text: "参与项目", items: [{ text: "开发与文档维护", link: "/development" }, { text: "游戏开发待办", link: "/development-backlog" }, { text: "工程文档", link: "/engineering" }, { text: "路线图", link: "/roadmap" }, { text: "Steam Demo v0.1 计划", link: "/steam-demo-v0.1" }, { text: "Demo 两章剧情设计", link: "/story-demo-chapters" }, { text: "Godot 迁移计划", link: "/godot-migration" }, { text: "Godot M2 进度", link: "/godot-m2" }, { text: "城市车流与共享单车", link: "/city-traffic" }, { text: "JSON 剧情配置", link: "/story-json-graph" }, { text: "AI 玩法设计（草案）", link: "/ai-gameplay" }, { text: "僵尸生存设计（草案）", link: "/zombie-survival" }, { text: "许可证", link: "/licensing" }] },
     ],
     search: {
       provider: "local",
