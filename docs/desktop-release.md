@@ -68,6 +68,21 @@ dayun-kicker/releases/preview/latest.json
 
 频道锁需要 `GetBucketVersioning`、发布前缀下 `GetObject` / `PutObject`，以及仅锁对象的 `DeleteObject` 权限。不会修改桶 ACL、CORS、版本控制或删除安装包。既有桶 GET / HEAD CORS 已允许官网读取；未开启过版本控制的桶才能安全使用禁止覆盖锁，检测到已开启或已暂停则拒绝发布，依据 [COS 官方规则](https://intl.cloud.tencent.com/document/product/436/43256?lang=en)。异常终止留下锁时，先核实没有发布进程再清理该锁，不能删除整个发布目录。
 
+## 本地产物保留与回收
+
+本地源码仓库提供按范围回收的命令，默认只预览：
+
+```sh
+pnpm clean:local
+pnpm clean:local --apply
+```
+
+Electron 历史 release 每个平台保留最近两份构建，并保护本次输出、最近七天的包、默认平台输出目录和 Git 跟踪文件。长期保留的版本可在目录放 `.keep`。回收只删除旧安装包与解包目录，QA 报告和构建身份清单继续保留；源文件、素材、冻结归档及实验结果不在自动回收范围内。Unix 上无法完成正在使用文件的检查时停止回收；Windows 上文件占用导致删除失败时保留错误，不强行终止应用。
+
+`desktop:release` 在验包及全部发布步骤完成后执行同一回收策略；失败时保留可供重试的输出。Godot 导出始终复用固定平台输出目录，模板解包与验包使用独占临时目录，在成功或失败后回收。中断遗留的 `template-*` 目录和 `verify-*` 内的解包应用超过一天后由 `clean:local` 回收，旧目录内的小型测试记录继续保留。
+
+当前工作区的依赖、Godot 导入与 Rust 增量缓存保持复用。实验快照应只纳入必要输入，排除旧 release、缓存和其他会话的工作树；确需独立冻结的输入单独记录用途与回收条件，避免把大体积历史输出带入每轮实验。
+
 ## 切换 Steam
 
 [clientDownloads.ts](https://github.com/YunLeFun/gza/blob/main/docs/.vitepress/game-reference/apps/dayun-kicker/src/config/clientDownloads.ts) 统一控制官网入口。当前 `provider: "cos"` 从公开 `preview/latest.json` 获取已验证链接，未发布平台显示「待发布」，网络失败提供重试。下载页只加载 Vue 和页面展示模块，不载入游戏场景或平台 SDK。
