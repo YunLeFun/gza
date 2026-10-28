@@ -12,7 +12,7 @@ pnpm docs:preview
 
 `docs/game/` 保存设定，`docs/guide/` 保存玩家手册，根目录与 `releases/` 保存经过整理的工程说明和历史验证记录。设计草案与未来计划不代表已经发布的玩法；发布记录中的测试结论只适用于记录的版本。
 
-最新讨论基线见 [Steam Demo v0.1 · 剧情与开发计划](steam-demo-v0.1.md)，记录五幕双世界方案、暂定 3D 美术方向、现有 Godot 复用范围与首个垂直切片，不替代已交付功能的验收记录。
+最新讨论基线见 [Steam Demo v0.1 · 剧情与开发计划](steam-demo-v0.1.md)，记录五幕双世界方案、暂定 3D 美术方向、现有 Godot 复用范围与首个垂直切片，不替代已交付功能的验收记录。镜头、色板与角色造型的锁定条目见 [美术圣经](art-bible.md)。
 
 开发执行清单统一在 [游戏开发待办](development-backlog.md)维护，记录稳定任务 ID、优先级、依赖和验收状态；`dayun-kicker/docs/development-backlog.md` 只留入口，源码与实现 PR 仍在原仓库，不复制第二份清单。
 

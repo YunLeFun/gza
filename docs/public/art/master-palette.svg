@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1026" role="img" aria-labelledby="palette-title palette-desc">
+<title id="palette-title">dayun-kicker Master Palette v0.1</title>
+<desc id="palette-desc">世界基底、品牌、玩法与 UI 令牌色块。色号与美术圣经一致。午夜青为提案；UI 品牌强调与世界桥接已锁定。丧尸世界没有正式色号。</desc>
+<rect width="960" height="1026" fill="#141414"/>
+<style>
+  text { font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", "Droid Sans Fallback", sans-serif; }
+  .title { font-size: 22px; font-weight: 700; fill: #F5F5F1; }
+  .sub { font-size: 13px; fill: #B6B6B3; }
+  .col { font-size: 13px; font-weight: 700; fill: #FFE6B0; letter-spacing: 0.04em; }
+  .name { font-size: 14px; fill: #B6B6B3; }
+  .hex { font-size: 12px; fill: #B6B6B3; font-family: ui-monospace, "SFMono-Regular", "Source Code Pro", monospace; }
+  .role { font-size: 12px; fill: #B6B6B3; }
+  .tag-proposal { font-size: 12px; fill: #E6C75B; }
+  .tag-locked { font-size: 12px; fill: #9CC58B; }
+</style>
+<text class="title" x="28" y="40">dayun-kicker Master Palette v0.1</text>
+<text class="sub" x="28" y="64">UI accent / world 已锁定 · 丧尸世界 hex 仍为提案</text>
+
+<text class="col" x="28.0" y="96">世界基底</text>
+<rect x="28.0" y="118" width="36" height="36" rx="6" fill="#E8DFC4" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="132">cream</text>
+<text class="hex" x="76.0" y="148">#E8DFC4</text>
+<text class="role" x="76.0" y="164">瓷砖</text>
+<rect x="28.0" y="192" width="36" height="36" rx="6" fill="#438F88" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="206">teal</text>
+<text class="hex" x="76.0" y="222">#438F88</text>
+<text class="role" x="76.0" y="238">青</text>
+<rect x="28.0" y="266" width="36" height="36" rx="6" fill="#CA6B51" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="280">coral</text>
+<text class="hex" x="76.0" y="296">#CA6B51</text>
+<text class="role" x="76.0" y="312">暖珊瑚</text>
+<rect x="28.0" y="340" width="36" height="36" rx="6" fill="#233D46" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="354">navy</text>
+<text class="hex" x="76.0" y="370">#233D46</text>
+<text class="role" x="76.0" y="386">海军</text>
+<rect x="28.0" y="414" width="36" height="36" rx="6" fill="#D2A353" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="428">ochre</text>
+<text class="hex" x="76.0" y="444">#D2A353</text>
+<text class="role" x="76.0" y="460">赭</text>
+<rect x="28.0" y="488" width="36" height="36" rx="6" fill="#AB5847" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="502">brick</text>
+<text class="hex" x="76.0" y="518">#AB5847</text>
+<text class="role" x="76.0" y="534">砖</text>
+<rect x="28.0" y="562" width="36" height="36" rx="6" fill="#BAB6A1" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="576">pavement</text>
+<text class="hex" x="76.0" y="592">#BAB6A1</text>
+<text class="role" x="76.0" y="608">路辅</text>
+<rect x="28.0" y="636" width="36" height="36" rx="6" fill="#939881" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="650">sand</text>
+<text class="hex" x="76.0" y="666">#939881</text>
+<text class="role" x="76.0" y="682">沙土</text>
+<rect x="28.0" y="710" width="36" height="36" rx="6" fill="#527B68" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="724">leaf</text>
+<text class="hex" x="76.0" y="740">#527B68</text>
+<text class="role" x="76.0" y="756">叶</text>
+<rect x="28.0" y="784" width="36" height="36" rx="6" fill="#39868C" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="76.0" y="798">sea</text>
+<text class="hex" x="76.0" y="814">#39868C</text>
+<text class="role" x="76.0" y="830">水面</text>
+<text class="col" x="258.0" y="96">品牌</text>
+<rect x="258.0" y="118" width="36" height="36" rx="6" fill="#FF514D" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="306.0" y="132">coral</text>
+<text class="hex" x="306.0" y="148">#FF514D</text>
+<text class="role" x="306.0" y="164">珊瑚</text>
+<rect x="258.0" y="192" width="36" height="36" rx="6" fill="#FFD447" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="306.0" y="206">gold</text>
+<text class="hex" x="306.0" y="222">#FFD447</text>
+<text class="role" x="306.0" y="238">金</text>
+<rect x="258.0" y="266" width="36" height="36" rx="6" fill="#4BD4FF" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="306.0" y="280">cyan</text>
+<text class="hex" x="306.0" y="296">#4BD4FF</text>
+<text class="role" x="306.0" y="312">青</text>
+<rect x="258.0" y="340" width="36" height="36" rx="6" fill="#0B2A36" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="306.0" y="354">midnight</text>
+<text class="hex" x="306.0" y="370">#0B2A36</text>
+<text class="role" x="306.0" y="386">午夜青 <tspan class="tag-proposal">提案</tspan></text>
+<text class="col" x="488.0" y="96">玩法</text>
+<rect x="488.0" y="118" width="36" height="36" rx="6" fill="#F2C53D" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="536.0" y="132">route</text>
+<text class="hex" x="536.0" y="148">#F2C53D</text>
+<text class="role" x="536.0" y="164">路线</text>
+<rect x="488.0" y="192" width="36" height="36" rx="6" fill="#FF514D" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="536.0" y="206">kick</text>
+<text class="hex" x="536.0" y="222">#FF514D</text>
+<text class="role" x="536.0" y="238">踢击</text>
+<rect x="488.0" y="266" width="36" height="36" rx="6" fill="#ED9A8B" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="536.0" y="280">enemy</text>
+<text class="hex" x="536.0" y="296">#ED9A8B</text>
+<text class="role" x="536.0" y="312">脸手</text>
+<rect x="488.0" y="340" width="36" height="36" rx="6" fill="#438F88" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="536.0" y="354">safe</text>
+<text class="hex" x="536.0" y="370">#438F88</text>
+<text class="role" x="536.0" y="386">据点</text>
+<text class="col" x="718.0" y="96">UI 令牌</text>
+<rect x="718.0" y="118" width="36" height="36" rx="6" fill="#090909" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="132">bg</text>
+<text class="hex" x="766.0" y="148">#090909</text>
+<text class="role" x="766.0" y="164">背景</text>
+<rect x="718.0" y="192" width="36" height="36" rx="6" fill="#171717" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="206">surface</text>
+<text class="hex" x="766.0" y="222">#171717</text>
+<text class="role" x="766.0" y="238">面板</text>
+<rect x="718.0" y="266" width="36" height="36" rx="6" fill="#F5F5F1" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="280">text</text>
+<text class="hex" x="766.0" y="296">#F5F5F1</text>
+<text class="role" x="766.0" y="312">正文</text>
+<rect x="718.0" y="340" width="36" height="36" rx="6" fill="#B6B6B3" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="354">muted</text>
+<text class="hex" x="766.0" y="370">#B6B6B3</text>
+<text class="role" x="766.0" y="386">次要字</text>
+<rect x="718.0" y="414" width="36" height="36" rx="6" fill="#9CC58B" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="428">success</text>
+<text class="hex" x="766.0" y="444">#9CC58B</text>
+<text class="role" x="766.0" y="460">成功</text>
+<rect x="718.0" y="488" width="36" height="36" rx="6" fill="#82B6DF" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="502">info</text>
+<text class="hex" x="766.0" y="518">#82B6DF</text>
+<text class="role" x="766.0" y="534">信息</text>
+<rect x="718.0" y="562" width="36" height="36" rx="6" fill="#E6C75B" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="576">warn</text>
+<text class="hex" x="766.0" y="592">#E6C75B</text>
+<text class="role" x="766.0" y="608">警告</text>
+<rect x="718.0" y="636" width="36" height="36" rx="6" fill="#ED9A8B" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="650">danger</text>
+<text class="hex" x="766.0" y="666">#ED9A8B</text>
+<text class="role" x="766.0" y="682">危险</text>
+<rect x="718.0" y="710" width="36" height="36" rx="6" fill="#F2C53D" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="724">reward</text>
+<text class="hex" x="766.0" y="740">#F2C53D</text>
+<text class="role" x="766.0" y="756">奖励</text>
+<rect x="718.0" y="784" width="36" height="36" rx="6" fill="#D4262C" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="798">danger+</text>
+<text class="hex" x="766.0" y="814">#D4262C</text>
+<text class="role" x="766.0" y="830">强危险</text>
+<rect x="718.0" y="858" width="36" height="36" rx="6" fill="#FF514D" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="872">accent</text>
+<text class="hex" x="766.0" y="888">#FF514D</text>
+<text class="role" x="766.0" y="904">品牌强调 <tspan class="tag-locked">已锁定</tspan></text>
+<rect x="718.0" y="932" width="36" height="36" rx="6" fill="#438F88" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+<text class="name" x="766.0" y="946">world</text>
+<text class="hex" x="766.0" y="962">#438F88</text>
+<text class="role" x="766.0" y="978">世界桥接 <tspan class="tag-locked">已锁定</tspan></text>
+</svg>
