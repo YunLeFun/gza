@@ -31,6 +31,8 @@ description: GZA：暴力电驴 Steam Demo v0.1 的五幕剧情提案、3D 美�
 
 本次五张生成概念图用于内部方向讨论，原图与提示词保存在源码工作区的忽略目录 `artifacts.local/concept-art-2026-10-17/`，不作为构建依赖或公开文档图片。若后续选为正式媒体，按 [COS 资源流程](media-assets.md)发布和校验。既有画面实现与历史边界见 [卡通画面氛围](cartoon-atmosphere.md)。
 
+2026-10-28 起，镜头、色板、角色造型与禁区的对照审计以 [美术圣经](art-bible.md) 为准。
+
 ## 2. 产品范围
 
 | 项目 | v0.1 范围 |
